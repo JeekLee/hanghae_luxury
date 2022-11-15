@@ -28,9 +28,8 @@ def pass_item() :
 @itempage.route('/getitemlist', methods=["GET"])
 def pass_item_list() :
     item_list = list(db.item.find({'user':user}, {'_id':True}))
-    # for i in item_list:
-    #     print(item_list[i])
-    print(item_list)
+    for i in item_list:
+        i['_id'] = str(i['_id'])
     return jsonify(item_list)
 
 @itempage.route("/complete", methods=["POST"])

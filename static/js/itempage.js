@@ -7,8 +7,7 @@ const leftBtn = document.getElementById('NAV_LEFT');
 const rightBtn = document.getElementById('NAV_RIGHT');
 
 // variables get from DB
-let name, price, pay_per_month, start_date, img, complete;
-
+let name, price, pay_per_month, start_date, img, complete, item_list;
 // Global Variables
 let payedMonth = 0;
 let leftMonth = 0;
@@ -149,8 +148,14 @@ function get_item_list(){
        success: function(response) {
          console.log("Item list");
          console.log(response);
+         item_list = response;
        }
    });
+   for (int i = 0; i<item_list.length; i++){
+     if (item_list[i]['_id'] == ){
+       return num;
+     }
+   }
 }
 function complete_item(){
   $.ajax({
