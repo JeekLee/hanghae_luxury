@@ -2,52 +2,34 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!--  CSS연결    -->
+    <link rel="stylesheet" href="{{url_for('static', filename='css/register.css')}}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
     <title>사치의 즐거움</title>
 
 </head>
-<style>
-    @font-face {
-        font-family: 'Cafe24Ssurround';
-        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff') format('woff');
-        font-weight: normal;
-        font-style: normal;
-    }
-
-    @font-face {
-        font-family: 'Pretendard-Regular';
-        src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-        font-weight: 400;
-        font-style: normal;
-    }
-
-    :root {
-        --color-background: #181818;
-        --color-background-2: #2D2D2D;
-        --color-point-1: #72F496;
-        --color-point-2: #7853F6;
-        --color-graywhite: #EDEDED;
-        --font-point: Cafe24Ssurround;
-        --font-basic: Pretendard-Regular;
-    }
-</style>
-
 <body>
 <div class="register_wrapper">
     <h1>회원가입</h1>
     <form class="register_form">
-        <input type="text" id="register_ID" name="id" onkeydown="onlyAlphabet(this)" placeholder="ID">
-        <div id="VERI_ID" class="msg"></div>
-        <button id="OVER_BTN" class="overlap_btn" type="button">중복확인</button>
-        <input type="password" id="REGI_PW1" name="id" onkeydown="onlyAlphabet(this)" placeholder="PASSWORD">
-        <div id="VERI_PW1" class="msg"></div>
-        <input type="password" id="REGI_PW2" name="id" onkeydown="onlyAlphabet(this)" placeholder="RE-ENTER PASSWORD">
-        <div id="VERI_PW2" class="msg"></div>
-        <button id="REGI_BTN" class="signup_btn" type="button" disabled>가입하기</button>
+        <input type="text" id="register_id" name="id" placeholder="ID">
+        <div id="verify_id" class="msg"></div>
+        <button id="over_btn" class="overlap_btn" type="button" onclick="id_test()" disabled>중복확인</button>
+        <input type="password" id="register_pwd1" name="id" placeholder="PASSWORD">
+        <div id="verify_pwd1" class="msg"></div>
+        <input type="password" id="register_pwd2" name="id"
+               placeholder="RE-ENTER PASSWORD">
+        <div id="verify_pwd2" class="msg"></div>
+        <button id="register_btn" class="register_btn" type="button" onclick="register()" disabled>가입하기</button>
     </form>
     <div class="go_login">
         <a href="{{ url_for('login.index') }}">로그인</a>
     </div>
 </div>
-<script type="text/javascript" src="{{ url_for('static', filename='register.js') }}"></script>
+<!--  JS연결    -->
+<script type="text/javascript" src="{{ url_for('static', filename='js/register.js') }}"></script>
+
 </body>
 </html>
+

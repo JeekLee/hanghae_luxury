@@ -21,3 +21,83 @@
     --font-point: Cafe24Ssurround;
     --font-basic: Pretendard-Regular;
 }
+
+body {
+    background: var(--color-background);
+}
+
+.register_wrapper {
+    padding: 90px 45px;
+    margin: 200px auto;
+    text-align: center;
+}
+
+h1 {
+    font-size: 35px;
+    color: var(--color-graywhite);
+    margin-bottom: 30px;
+}
+
+form input {
+    font-size: 15px;
+    width: 280px;
+    outline: none;
+    border: 1px solid #fff;
+    padding: 12px 15px;
+    margin-bottom: 25px;
+    border-radius: 25px;
+}
+
+.overlap_btn {
+    width: 45px;
+    height: 50px;
+    border-radius: 15px;
+    outline: none;
+    border: none;
+    background: var(--color-point-2);
+    color: var(--color-graywhite);
+    font-size: 14px;
+    padding: 3px 8px;
+    text-align: center;
+    transition: all 0.9s;
+    position: absolute;
+    margin-left: 325px;
+    top: 387px;
+    cursor: pointer;
+
+}
+
+.overlap_btn:hover {
+    box-shadow: 65px 0 0 0 rgba(0, 0, 0, 0.25) inset
+}
+
+.register_btn {
+    font-size: 20px;
+    margin-top: 20px;
+    padding: 10px 0;
+    border-radius: 20px;
+    outline: none;
+    border: none;
+    width: 200px;
+    color: var(--color-graywhite);
+    cursor: pointer;
+    background: var(--color-point-2);
+    text-align: center;
+    transition: all 0.9s;
+}
+
+.register_btn:hover {
+    box-shadow: 240px 0 0 0 rgba(0, 0, 0, 0.25) inset,
+    -240px 0 0 0 rgba(0, 0, 0, 0.25) inset;
+}
+
+.go_login {
+    font-size: 20px;
+    margin-top: 50px;
+    color: var(--color-graywhite);
+
+}
+.go_login a {
+    color: var(--color-graywhite);
+    text-decoration: none;
+}
