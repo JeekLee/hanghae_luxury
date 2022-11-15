@@ -62,15 +62,17 @@ header button:active {
 }
 
 main {
+  margin-top: 90px;
   width: 100vw;
+  height: 60vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  overflow: auto;
 }
 
 main h5 {
-  margin-top: 65px;
+  /*margin-top: 65px;*/
   background-color: transparent;
   font-size: 18px;
   font-family: var(--font-basic);
@@ -112,15 +114,18 @@ main h5 {
   justify-content: center;
   align-items: center;
   font-family: var(--font-point);
+  z-index: 9;
 }
 
 footer {
   position: absolute;
   background-color: transparent;
-  bottom: 20px;
-  right: 0;
+  background: linear-gradient(rgba(45, 45, 45, 0), var(--color-background-2));
+  bottom: 0;
   z-index: 2;
-  padding: 20px 8vw 20px 8vw;
+  width: 100vw;
+  display: flex;
+  justify-content: flex-end;
 }
 
 footer button {
@@ -128,6 +133,7 @@ footer button {
   height: 60px;
   background-color: var(--color-point-1);
   border-radius: 50px;
+
   border: none;
   color: var(--color-background-2);
   font-weight: 500;
