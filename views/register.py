@@ -8,16 +8,16 @@ db = client.Luxury
 register = Blueprint("register", __name__, template_folder="templates")
 
 @register.route('/')
-def register():
+def read_register():
     return render_template('register.html')
 
+# 아이디 중복확인 (DB에서 확인)
 @register.route("/check", methods=["GET"])
 def check_id():
-    # 프론트에서 요청: /register/check?id=값
-    id = request.args.get('id')
-    print(id)
+    user_id = request.args.get('id')
+    print(user_id)
 
-    result = db.user.find_one({'user_id': id})
+    result = db.user.find_one({'id': user_id})
     print(result)
     print(type(result))
     print(result == None)
@@ -30,8 +30,8 @@ def check_id():
     return jsonify(doc)
 
 # 회원가입 API
-@register.route("/", methods=["POST"])
-def join():
+@register.route("/api/register", methods=["POST"])
+def api_register():
     id_receive = request.form['id']
     pw_receive = request.form['pwd']
 

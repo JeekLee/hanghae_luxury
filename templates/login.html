@@ -2,100 +2,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!--  CSS연결    -->
+    <link rel="stylesheet" href="{{url_for('static', filename='css/login.css')}}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
     <title>사치의 즐거움</title>
 </head>
-<style>
-    @font-face {
-        font-family: 'Cafe24Ssurround';
-        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff') format('woff');
-        font-weight: normal;
-        font-style: normal;
-    }
 
-    @font-face {
-        font-family: 'Pretendard-Regular';
-        src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-        font-weight: 400;
-        font-style: normal;
-    }
-
-    :root {
-        --color-background: #181818;
-        --color-background-2: #2D2D2D;
-        --color-point-1: #72F496;
-        --color-point-2: #7853F6;
-        --color-graywhite: #EDEDED;
-        --font-point: Cafe24Ssurround;
-        --font-basic: Pretendard-Regular;
-    }
-
-    body {
-        background-color: var(--color-background);
-    }
-
-    .login_wrapper {
-        padding: 90px 45px;
-        margin: 200px auto;
-        text-align: center;
-    }
-
-    h1 {
-        font-size: 35px;
-        color: var(--color-graywhite);
-        margin-bottom: 30px;
-    }
-
-    form input {
-        font-size:15px;
-        width: 280px;
-        outline: none;
-        border: 6px solid #fff;
-        padding: 12px 15px;
-        margin-bottom: 25px;
-        border-radius: 25px;
-    }
-
-    button {
-        font-size: 20px;
-        margin-top: 20px;
-        padding: 10px 0;
-        border-radius: 20px;
-        outline: none;
-        border: none;
-        width: 200px;
-        color: var(--color-graywhite);
-        cursor: pointer;
-        background: var(--color-point-2);
-        text-align: center;
-        transition: all 0.9s;
-    }
-    .login_btn:hover{
-         box-shadow: 240px 0 0 0 rgba(0,0,0,0.25) inset,
-                   -240px 0 0 0 rgba(0,0,0,0.25) inset;
-    }
-    .go_register {
-    font-size: 20px;
-    margin-top: 50px;
-    color: var( --color-graywhite);
-
-}
-
-
-</style>
 <body>
 <div class="login_wrapper">
     <h1>사치의 즐거움</h1>
     <form class="login_form">
-        <input type="text" id="login_id" name="id" onkeydown="login_rule(this)" placeholder="ID">
-        <div id="veri_id" class="msg"></div>
-        <input type="password" id="login_pwd" name="id" onkeydown="login_rule(this)" placeholder="PASSWORD">
-        <div id="veri_pw" class="msg"></div>
+        <input type="text" id="login_id" name="id" placeholder="ID">
+        <div id="verify_id" class="msg"></div>
+        <input type="password" id="login_pwd" name="id" placeholder="PASSWORD">
+        <div id="verify_pw" class="msg"></div>
         <button id="login_btn" class="login_btn" type="button" disabled>로그인</button>
     </form>
     <div class="go_register">
         <a href="{{ url_for('login.register') }}">회원가입</a>
     </div>
 </div>
-<script type="text/javascript" src="{{ url_for('static', filename='login.js') }}"></script>
+<!--  JS연결    -->
+<script type="text/javascript" src="{{ url_for('static', filename='js/login.js') }}"></script>
+
 </body>
 </html>
+
+<!--
+가지고 있는 토큰만 쿠키에서 없애면 로그아웃
+      function logout(){
+        $.removeCookie('mytoken');
+        alert('로그아웃!')
+        window.location.href='/login'
+      }
+-->
