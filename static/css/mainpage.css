@@ -104,9 +104,14 @@ main h5 {
   right: 5px;
   width: 45px;
   height: 45px;
-  background-color: #7853f6;
+  background-color: var(--color-background-2);
   z-index: 2;
   border-radius: 25px;
+  color: var(--color-point-1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: var(--font-point);
 }
 
 footer {
@@ -124,7 +129,7 @@ footer button {
   background-color: var(--color-point-1);
   border-radius: 50px;
   border: none;
-  color: var(--color-graywhite);
+  color: var(--color-background-2);
   font-weight: 500;
   font-size: 35px;
 }
