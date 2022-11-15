@@ -5,6 +5,62 @@
     <title>Title</title>
 </head>
 <body>
+  <!DOCTYPE html>
+  <html lang="en">
 
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- AJAX 설정 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Doc Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <!-- icon Bootstrap 불러오기 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <!-- CSS 연결 -->
+    <link rel="stylesheet" href="{{url_for('static', filename='css/itempage.css')}}" />
+    <title>사치의즐거움::Itempage</title>
+  </head>
+
+  <body>
+    <div class="item_wrapper">
+      <div class="item_nav">
+        <nav>
+          <a id="NAV_LEFT" href="#"><i class="bi bi-arrow-left-square"></i></a>
+          <a id="NAV_RIGHT" href="#"><i class="bi bi-arrow-right-square"></i></a>
+        </nav>
+        <a href="#"><i class="bi bi-x-circle"></i></a>
+      </div>
+      <div class="item_image">
+        <div id = "ITEM_IMG" class="item_image_circle">
+          <!-- <img src="https://w.namu.la/s/426bf4c3324155e1b82e0e046c4e61042676dc0fd5fd75cb78897be9bd4175637a5c9613642fde68a30929743919cd17c121bbb40a61245667c9a4b14c53cb0d928d4464b2fe69c197459d4ae835872e74c929c80b22ab23dfcab89fafaade8278ac4a6488f0963db145ed463076624a" alt=""> -->
+        </div>
+      </div>
+      <div class="item_txt">
+        <div id="TXT_INFO" class="item_txt_info">
+          <!-- <span style="font-size:4vh">Sample Item</span>
+          <span style="font-size:2.5vh">5000000원</span> -->
+        </div>
+        <div id="TXT_PAY" class="item_txt_pay">
+          <!-- <span style="font-size:2vh">남은 금액 : 500000원 / 100000원</span> -->
+        </div>
+        <div id="TXT_MONTH" class="item_txt_month">
+          <!-- <span style="font-size:3.5vh">😀5개월😀 뒤면 내꺼!</span> -->
+        </div>
+        <div id="TXT_DRIP" class="item_txt_drip">
+          <!-- <span style="font-size:2vh"><em><del>이 돈이면 한 달에 치킨이 10개......</del></em></span> -->
+        </div>
+      </div>
+      <div id="ITEM_BTN" class="item_btn">
+        <button id="END_BTN" type="button" class="btn btn-outline-primary">잔액 결제 완료!</button>
+        <button id="DEL_BTN" type="button" class="btn btn-outline-secondary">안살래 그냥</button>
+      </div>
+    </div>
+    <!-- JS 연결 -->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/itempage.js') }}"></script>
+  </body>
+  </html>
 </body>
 </html>
