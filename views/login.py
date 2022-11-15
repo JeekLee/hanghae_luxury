@@ -5,3 +5,11 @@ client = MongoClient('mongodb+srv://Luxury:hanghae99@luxury.uhfyrvo.mongodb.net/
 db = client.Luxury
 
 login = Blueprint("login", __name__, template_folder="templates")
+
+@login.route('/home')
+def index():
+    return render_template('login.html')
+
+@login.route('/reigster')
+def register():
+    return render_template('register.html')

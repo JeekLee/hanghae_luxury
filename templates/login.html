@@ -29,19 +29,68 @@
         --font-basic: Pretendard-Regular;
     }
 
-    body{
+    body {
         background-color: var(--color-background);
     }
+
+    .login_wrapper {
+        padding: 90px 45px;
+        margin: 200px auto;
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 35px;
+        color: var(--color-graywhite);
+        margin-bottom: 30px;
+    }
+
+    form input {
+        font-size:15px;
+        width: 280px;
+        outline: none;
+        border: 6px solid #fff;
+        padding: 12px 15px;
+        margin-bottom: 25px;
+        border-radius: 25px;
+    }
+
+    button {
+        font-size: 20px;
+        margin-top: 20px;
+        padding: 10px 0;
+        border-radius: 20px;
+        outline: none;
+        border: none;
+        width: 200px;
+        color: var(--color-graywhite);
+        cursor: pointer;
+        background: var(--color-point-2);
+        text-align: center;
+        transition: all 0.9s;
+    }
+    .login_btn:hover{
+         box-shadow: 240px 0 0 0 rgba(0,0,0,0.25) inset,
+                   -240px 0 0 0 rgba(0,0,0,0.25) inset;
+    }
+    .go_register {
+    font-size: 20px;
+    margin-top: 50px;
+    color: var( --color-graywhite);
+
+}
+
+
 </style>
 <body>
 <div class="login_wrapper">
     <h1>사치의 즐거움</h1>
     <form class="login_form">
-        <input type="text" id="LOGIN_ID" name="id" onkeydown="onlyAlphabet(this)" placeholder="ID">
-        <div id="VERI_ID" class="msg"></div>
-        <input type="password" id="LOGIN_PW" name="id" onkeydown="onlyAlphabet(this)" placeholder="PASSWORD">
-        <div id="VERI_PW" class="msg"></div>
-        <button id="LOGIN_BTN" type="button" disabled>로그인</button>
+        <input type="text" id="login_id" name="id" onkeydown="login_rule(this)" placeholder="ID">
+        <div id="veri_id" class="msg"></div>
+        <input type="password" id="login_pwd" name="id" onkeydown="login_rule(this)" placeholder="PASSWORD">
+        <div id="veri_pw" class="msg"></div>
+        <button id="login_btn" class="login_btn" type="button" disabled>로그인</button>
     </form>
     <div class="go_register">
         <a href="{{ url_for('login.register') }}">회원가입</a>

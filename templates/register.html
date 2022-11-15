@@ -29,20 +29,97 @@
         --font-point: Cafe24Ssurround;
         --font-basic: Pretendard-Regular;
     }
+
+    body {
+        background: var(--color-background);
+    }
+
+    .register_wrapper {
+        padding: 90px 45px;
+        margin: 200px auto;
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 35px;
+        color: var(--color-graywhite);
+        margin-bottom: 30px;
+    }
+
+    form input {
+        font-size: 15px;
+        width: 280px;
+        outline: none;
+        border: 6px solid #fff;
+        padding: 12px 15px;
+        margin-bottom: 25px;
+        border-radius: 25px;
+    }
+
+    .overlap_btn {
+        width: 50px;
+        height: 55px;
+        border-radius: 15px;
+        outline: none;
+        border: none;
+        background: var(--color-point-2);
+        color: var(--color-graywhite);
+        font-size: 15px;
+        padding: 5px 10px;
+        text-align: center;
+        transition: all 0.9s;
+        position: absolute;
+        margin-left: 340px;
+        top: 391px;
+        cursor: pointer;
+
+    }
+
+    .overlap_btn:hover {
+        box-shadow: 65px 0 0 0 rgba(0, 0, 0, 0.25) inset
+    }
+
+    .register_btn {
+        font-size: 20px;
+        margin-top: 20px;
+        padding: 10px 0;
+        border-radius: 20px;
+        outline: none;
+        border: none;
+        width: 200px;
+        color: var(--color-graywhite);
+        cursor: pointer;
+        background: var(--color-point-2);
+        text-align: center;
+        transition: all 0.9s;
+    }
+
+    .register_btn:hover {
+        box-shadow: 240px 0 0 0 rgba(0, 0, 0, 0.25) inset,
+        -240px 0 0 0 rgba(0, 0, 0, 0.25) inset;
+    }
+
+    .go_login {
+        font-size: 20px;
+        margin-top: 50px;
+        color: var(--color-graywhite);
+
+    }
 </style>
 
 <body>
 <div class="register_wrapper">
     <h1>회원가입</h1>
     <form class="register_form">
-        <input type="text" id="register_ID" name="id" onkeydown="onlyAlphabet(this)" placeholder="ID">
-        <div id="VERI_ID" class="msg"></div>
-        <button id="OVER_BTN" class="overlap_btn" type="button">중복확인</button>
-        <input type="password" id="REGI_PW1" name="id" onkeydown="onlyAlphabet(this)" placeholder="PASSWORD">
-        <div id="VERI_PW1" class="msg"></div>
-        <input type="password" id="REGI_PW2" name="id" onkeydown="onlyAlphabet(this)" placeholder="RE-ENTER PASSWORD">
-        <div id="VERI_PW2" class="msg"></div>
-        <button id="REGI_BTN" class="signup_btn" type="button" disabled>가입하기</button>
+        <input type="text" id="register_id" name="id" onkeydown="regi_rule(this)" placeholder="ID">
+        <div id="verify_id" class="msg"></div>
+        <button id="over_btn" class="overlap_btn" type="button" onclick="check()" disabled>중복확인</button>
+        <input type="password" id="register_pwd1" name="id" onkeydown="regi_rule(this)" placeholder="PASSWORD">
+        <div id="verify_pwd1" class="msg"></div>
+        <input type="password" id="register_pwd2" name="id" onkeydown="regi_rule(this)"
+               placeholder="RE-ENTER PASSWORD">
+        <div id="verify_pwd2" class="msg"></div>
+        <button id="register_btn" class="register_btn" type="button" disabled>가입하기</button>
     </form>
     <div class="go_login">
         <a href="{{ url_for('login.index') }}">로그인</a>
