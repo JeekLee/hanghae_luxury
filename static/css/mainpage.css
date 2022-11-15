@@ -1,0 +1,139 @@
+@font-face {
+  font-family: 'Cafe24Ssurround';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Pretendard-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff')
+    format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+:root {
+  --color-background: #181818;
+  --color-background-2: #2d2d2d;
+  --color-graywhite: #ededed;
+  --color-point-1: #72f496;
+  --color-point-2: #7853f6;
+  --font-point: Cafe24Ssurround;
+  --font-basic: Pretendard-Regular;
+}
+
+* {
+  background-color: var(--color-background);
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+}
+
+header {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+}
+header button {
+  display: flex;
+  background-color: #2d2d2d;
+  color: var(--color-graywhite);
+  border: none;
+  padding: 10px 15px;
+  margin: 5px;
+  border-radius: 10px;
+  font-family: var(--font-point);
+  font-size: 18px;
+  cursor: pointer;
+}
+
+header button:hover {
+  background-color: #7853f6;
+}
+
+header button:active {
+  background-color: #7853f6;
+}
+
+main {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+main h5 {
+  margin-top: 65px;
+  background-color: transparent;
+  font-size: 18px;
+  font-family: var(--font-basic);
+  color: var(--color-graywhite);
+  z-index: 1;
+}
+
+.image-container {
+  margin-top: 22px;
+  display: grid;
+  width: 85vw;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.image-container .image img {
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+}
+
+.image-container .image {
+  position: relative;
+  background-color: transparent;
+  z-index: 1;
+}
+
+.image-container .image .circle {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  width: 45px;
+  height: 45px;
+  background-color: #7853f6;
+  z-index: 2;
+  border-radius: 25px;
+}
+
+footer {
+  position: absolute;
+  background-color: transparent;
+  bottom: 20px;
+  right: 0;
+  z-index: 2;
+  padding: 20px 8vw 20px 8vw;
+}
+
+footer button {
+  width: 60px;
+  height: 60px;
+  background-color: var(--color-point-1);
+  border-radius: 50px;
+  border: none;
+  color: var(--color-graywhite);
+  font-weight: 500;
+  font-size: 35px;
+}
+
+.graybackground {
+  position: absolute;
+  top: 150px;
+  background-color: var(--color-background-2);
+  width: 100vw;
+  height: 100%;
+  border-radius: 50px 50px 0 0;
+}
