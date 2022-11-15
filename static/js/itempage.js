@@ -7,16 +7,22 @@ const leftBtn = document.getElementById('NAV_LEFT');
 const rightBtn = document.getElementById('NAV_RIGHT');
 
 // variables get from DB
-let name, price, pay_per_month, start_date, img, complete, item_list;
+let name, price, pay_per_month, start_date, img, complete, item_list, this_objectId, this_index;
 // Global Variables
 let payedMonth = 0;
 let leftMonth = 0;
+
+const searchParams = new URLSearchParams(location.search);
+
+for (const param of searchParams) {
+  this_objectId = param[1]
+}
 
 // function activates when DOMtree is organized
 $(document).ready(function() {
   console.log('itempage.js called');
   get_item();
-  get_item_list();
+  this_index = get_item_list();
   calc_leftmonth(start_date);
 
   to_html_img(img);
@@ -151,9 +157,9 @@ function get_item_list(){
          item_list = response;
        }
    });
-   for (int i = 0; i<item_list.length; i++){
-     if (item_list[i]['_id'] == ){
-       return num;
+   for (let i = 0; i<item_list.length; i++){
+     if (item_list[i]['_id'] == this_objectId){
+       return i;
      }
    }
 }
@@ -184,15 +190,24 @@ function delitem(){
 
 // function to browse other item
 function to_left_item(){
+  if (this_index - 1 < 0){
+    alert("첫번째 게시물입니다.");
+    return;
+  }
   console.log("To left item");
-  // if 문으로 비어있는 경우 움직이지 못하게 처리
-  // objectID를 넣어서 다시 페이지 불러오기
+  var url = "/itempage?item=" + item_list[this_index-1]['_id'];
+  window.location.href = url;
 }
 function to_right_item(){
+  if (this_index + 1 > item_list.length - 1){
+    alert("마지막 게시물입니다.");
+    return;
+  }
   console.log("To right item");
-  // if 문으로 비어있는 경우 움직이지 못하게 처리
-  // objectID를 넣어서 다시 페이지 불러오기
+  var url = "/itempage?item=" + item_list[this_index+1]['_id'];
+  window.location.href = url;
 }
+
 // event Listeners
 endBtn.addEventListener('click', complete_item);
 delBtn.addEventListener('click', delitem);

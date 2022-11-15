@@ -63,6 +63,8 @@ cover/
 # Translations
 *.mo
 *.pot
+.idea
+.gitignore
 
 # Django stuff:
 *.log
