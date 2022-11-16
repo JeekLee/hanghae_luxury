@@ -48,8 +48,8 @@ def item_post():
         'date': date_receive,
         'months':months_receive
     }
+    print(doc)
     db.items.insert_one(doc)
-    # return jsonify({'title': title,'image':image})
     return jsonify({ 'msg': "success"})
 
     
