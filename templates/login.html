@@ -2,21 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--  CSS연결    -->
     <link rel="stylesheet" href="{{url_for('static', filename='css/login.css')}}"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
     <title>사치의 즐거움</title>
-</head>
 
+</head>
 <body>
 <div class="login_wrapper">
     <h1>사치의 즐거움</h1>
     <form class="login_form">
         <input type="text" id="login_id" name="id" placeholder="ID">
-        <div id="verify_id" class="msg"></div>
+        <div id="verify_loginid" class="msg"></div>
         <input type="password" id="login_pwd" name="id" placeholder="PASSWORD">
-        <div id="verify_pw" class="msg"></div>
+        <div id="verify_loginpwd" class="msg"></div>
         <button id="login_btn" class="login_btn" type="button" disabled>로그인</button>
     </form>
     <div class="go_register">

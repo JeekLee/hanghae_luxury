@@ -3,6 +3,7 @@ from pymongo import MongoClient
 import hashlib
 import datetime
 import jwt
+import certifi
 
 client = MongoClient('mongodb+srv://Luxury:hanghae99@luxury.uhfyrvo.mongodb.net/Luxury?retryWrites=true&w=majority')
 db = client.Luxury
@@ -11,8 +12,7 @@ SECRET_KEY = 'SPARTA'
 
 login = Blueprint("login", __name__, template_folder="templates")
 
-
-@login.route('/home')
+@login.route('/login')
 def index():
     return render_template('login.html')
 
@@ -21,21 +21,7 @@ def index():
 def register():
     return render_template('register.html')
 
-
-@login.route('/')
-def home():
-    token_receive = request.cookies.get('mytoken')
-    try:
-        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        user_info = db.user.find_one({"id": payload['id']})
-        return render_template('mainpage.html', ID=user_info["id"])    #메인페이지로
-    except jwt.ExpiredSignatureError:
-        return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
-    except jwt.exceptions.DecodeError:
-        return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
-
-
-@login.route('/api/login', methods=['POST'])
+@login.route("/login/api/tklogin", methods=["POST"])
 def api_login():
     id_receive = request.form['id_give']
     pw_receive = request.form['pw_give']
@@ -83,3 +69,16 @@ def api_valid():
         return jsonify({'result': 'fail', 'msg': '로그인 시간이 만료되었습니다.'})
     except jwt.exceptions.DecodeError:
         return jsonify({'result': 'fail', 'msg': '로그인 정보가 존재하지 않습니다.'})
+
+
+@login.route('/')
+def home():
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        user_info = db.user.find_one({"id": payload['id']})
+        return render_template('mainpage.html', ID=user_info["id"])    #메인페이지로?
+    except jwt.ExpiredSignatureError:
+        return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
+    except jwt.exceptions.DecodeError:
+        return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
