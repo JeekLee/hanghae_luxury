@@ -14,21 +14,12 @@
   <script>
     $(document).ready(function () {
       showUrl();
-      // showItem()
-      // getItemFromUrl();
-
-    //   $('form').on("submit", function(event){
-    //   event.preventDefault();
-    //   saveItem()
-    // })
     $('#form_info').submit(function(event){
       event.preventDefault();
       saveItem()
     })
     });
 
-    let imgSrc =
-      "https://images.unsplash.com/photo-1510917065317-aa26965fe730?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MXw5MjY0ODIyfHxlbnwwfHx8fA%3D%3D&w=1000&q=80.jpg";
     const isValidUrl = $("#url").val() !== "";
 
     function showUrl() {
@@ -39,9 +30,6 @@
     }
     function showItem() {
       $("#url_wrapper").hide() && $("#item").show();
-    }
-    function onChangeHandler() {
-      // const isvalid = $("#url").val() !== "";
     }
     function getItemFromUrl() {
       $.ajax({
@@ -61,11 +49,6 @@
     }
 
     function saveItem() {
-      console.log("img", $("#item_img").attr("src"));
-      console.log("item_title", $("#item_title").text());
-      console.log("item_price", $("#item_price").text().replaceAll(",", ""));
-      console.log("item_date", $("#item_date").val());
-      console.log("item_months", $("#item_months").val());
       $.ajax({
         type: "POST",
         url: "/addpage/adding",
@@ -79,7 +62,7 @@
         success: function (response) {
           if(response['msg']==="success"){
             alert("저장 완료 !");
-            // location.href = "/mainpage"
+            location.href = "/mainpage"
           }
         },
       });
@@ -103,8 +86,6 @@
         <h2>Flex url :</h2>
         <input
           id="url"
-          value="https://smartstore.naver.com/caseof/products/4994310522?NaPm=ct%3Dlahsevsg%7Cci%3Dba2ef2fd20e0fb2884ec9f0c58c59ef1f35eacf9%7Ctr%3Dsls%7Csn%3D1134409%7Chk%3D2e258a65fa209537def1ecae190c34ecf1300d11"
-          onkeydown="onChangeHandler()"
           autocomplete="off"
         >
         <button onclick="getItemFromUrl()">확인</button>
@@ -130,6 +111,5 @@
       </div>
     </div>
   </main>
-    <!-- <div class="graybackground"></div> -->
   </body>
 </html>
