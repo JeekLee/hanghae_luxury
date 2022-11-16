@@ -94,7 +94,7 @@ LOGIN_BTN.addEventListener('click', login);
 //       function logout(){
 //         $.removeCookie('mytoken');
 //         alert('로그아웃!')
-//         window.location.href='/login'
+//         window.location.href='/home/login'
 //       }
 //
 
