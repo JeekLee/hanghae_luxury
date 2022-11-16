@@ -92,7 +92,6 @@ const buttonClick = (select)=>{
                 },
                 error: function (response) {
                         alert(response['responseJSON']['msg'])
-                        location.href ='/';
                 }
             })}
 
@@ -148,7 +147,6 @@ $(function() {
         },
         error: function (response) {
             alert(response['responseJSON']['msg'])
-            location.href = '/';
         }
     })
 })
@@ -169,5 +167,9 @@ $(function() {
     $('.add-button').click(()=>{location.href = '/addpage'})
 })
 
-
+function logout() {
+    $.removeCookie('mytoken', { path: '/' });
+    alert('로그아웃!')
+    window.location.href = '/'
+}
 
