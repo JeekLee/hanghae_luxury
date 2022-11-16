@@ -28,7 +28,7 @@ $(document).ready(function() {
   pay_per_month = parseInt(price/months);
 
   calc_leftmonth(start_date);
-  if (leftMonth <= 0){
+  if (leftMonth <= 0 && complete == false){
     complete_item();
     complete == true;
   }
