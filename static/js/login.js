@@ -41,7 +41,7 @@ function login() {
                 $.cookie('mytoken', response['token']);
 
                 alert('로그인 완료!')
-                window.location.href = '/'  //로그인 완료 되면 메인페이지로 ?
+                window.location.href = '/mainpage'  //로그인 완료 되면 메인페이지로 ?
             } else {
                 //로그인이 안되면 에러메시지를 띄운다.
                 alert(response['msg'])

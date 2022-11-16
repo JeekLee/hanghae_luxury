@@ -14,6 +14,7 @@ app.register_blueprint(mainpage, url_prefix="/mainpage")
 app.register_blueprint(addpage, url_prefix="/addpage")
 app.register_blueprint(itempage, url_prefix="/itempage")
 
+
 @app.route("/")
 def hello_world():
     return render_template("login.html")

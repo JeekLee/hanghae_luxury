@@ -38,7 +38,8 @@ def api_register():
 
     user = db.user.find_one({'id': id_receive})
 
-    if(user):
+    if user is not None:
+
         return jsonify({"message": "다시 시도 해 주세요."})
 
     else:
