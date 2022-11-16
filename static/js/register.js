@@ -85,7 +85,7 @@ function verify() {
     } else {
         REGISTER_ID.style.backgroundColor = "#f5dad7";
         VERIFY_ID.style.color = "red";
-        VERIFY_ID.innerText = 'ID는 5글자 이상, 15글자 이하 영문, 숫자 입력이 가능합니다.';
+        VERIFY_ID.innerText = '5~15글자 영문, 숫자만 입력해주세요';
         VERIFY_ID.style.marginBottom = "15px";
         FLAGID = false;
     }
@@ -109,7 +109,7 @@ function verify() {
     } else {
         REGISTER_PWD1.style.backgroundColor = "#f5dad7";
         VERIFY_PWD1.style.color = "red";
-        VERIFY_PWD1.innerText = 'PW는 5글자 이상, 15글자 이하 영문, 숫자 입력이 가능합니다.';
+        VERIFY_PWD1.innerText = '5~15글자 영문, 숫자만 입력해주세요';
         VERIFY_PWD1.style.marginBottom = "15px";
         FLAGPW1 = false;
     }

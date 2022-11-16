@@ -87,29 +87,29 @@ button {
 }
 
 h1 {
-    font-size: 17.5px;
+    font-size: 25px;
     color: var(--color-graywhite);
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 form input {
-    font-size: 7.5px;
-    width: 140px;
+    font-size: 14px;
+    width: 195px;
     outline: none;
-    border: 0.5px solid #fff;
+    border: 1px solid #fff;
     padding: 6px 7.5px;
-    margin-bottom: 12.5px;
-    border-radius: 12.5px;
+    margin-bottom: 16.5px;
+    border-radius: 16.5px;
 }
 
-button {
-    font-size: 10px;
-    margin-top: 10px;
-    padding: 5px 0;
-    border-radius: 10px;
+.login_btn {
+    font-size: 14px;
+    margin-top: 14px;
+    padding: 7px 0;
+    border-radius: 15px;
     outline: none;
     border: none;
-    width: 100px;
+    width: 150px;
     color: var(--color-graywhite);
     cursor: pointer;
     background: var(--color-point-2);
@@ -118,12 +118,12 @@ button {
 }
 
 .login_btn:hover {
-    box-shadow: 120px 0 0 0 rgba(0, 0, 0, 0.25) inset,
-    -120px 0 0 0 rgba(0, 0, 0, 0.25) inset;
+    box-shadow: 170px 0 0 0 rgba(0, 0, 0, 0.25) inset,
+    -170px 0 0 0 rgba(0, 0, 0, 0.25) inset;
 }
 
 .go_register {
-    font-size: 10px;
+    font-size: 15px;
     margin-top: 25px;
     color: var(--color-graywhite);
 

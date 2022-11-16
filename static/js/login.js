@@ -29,7 +29,7 @@ $(document).ready(function () {
 function login() {
     $.ajax({
         type: "POST",
-        url: "/login/api/tklogin",
+        url: "/home/login/api/tklogin",
         data: {
             id_give: $('#login_id').val(),
             pw_give: $('#login_pwd').val(),
@@ -86,7 +86,15 @@ function verify() {
         LOGIN_BTN.disabled = true;
     }
 }
-
 LOGIN_ID.addEventListener('keyup', verify);
 LOGIN_PWD.addEventListener('keyup', verify);
 LOGIN_BTN.addEventListener('click', login);
+//
+// 가지고 있는 토큰만 쿠키에서 없애면 로그아웃
+//       function logout(){
+//         $.removeCookie('mytoken');
+//         alert('로그아웃!')
+//         window.location.href='/login'
+//       }
+//
+
