@@ -1,7 +1,8 @@
 from flask import Blueprint, render_template, jsonify
 from pymongo import MongoClient
+from bson.objectid import ObjectId
 import certifi
-from datetime import date, timedelta
+
 
 ca = certifi.where()
 
@@ -16,9 +17,13 @@ def question():
 
 @mainpage.route("/getitems", methods=["GET"])
 def all_items_get():
-    items = list(db.items.find({}, {'_id': False}))
-    return jsonify({'items': items })
+    items = list(db.items.find({}))
+    for i in items:
+        i['_id'] = str(i['_id'])
+
+    return jsonify({'items': items})
 
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
+
