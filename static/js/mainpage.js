@@ -16,7 +16,7 @@ const remainMonthCalculate = (nowYear, nowMonth, startYear, startMonth, payMonth
 
 const onclickmypage = (id)=>{
     // console.log(id)
-    location.href = "/itempage/name=" + id
+    location.href = "/itempage/?name=" + id
  }
 
 const buttonClick = (select)=>{
