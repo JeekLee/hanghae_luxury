@@ -60,7 +60,8 @@ def item_post():
                'image': img_receive,
                'price': price_receive,
                'date': date_receive,
-               'months': months_receive
+               'months': months_receive,
+               'complete':False
                }
         print(doc)
         db.items.insert_one(doc)
