@@ -5,6 +5,7 @@
     <title>Title</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
     <link rel="stylesheet" href="../static/css/addpage.css" />
   </head>
   <style>
@@ -32,6 +33,8 @@
 
     function showUrl() {
       $("#url").val("");
+      $("#item_date").val("")
+      $("#item_months").val("")
       $("#url_wrapper").show() && $("#item").hide();
     }
     function showItem() {
@@ -74,19 +77,27 @@
           months_give: $("#item_months").val(),
         },
         success: function (response) {
-          alert("저장 완료 !");
-          location.href = "/mainpage"
+          if(response['msg']==="success"){
+            alert("저장 완료 !");
+            // location.href = "/mainpage"
+          }
         },
       });
     }
     function cancelAdding() {
       showUrl();
     }
+    function goBack(){
+      history.back()
+    }
 
   </script>
   <body>
     <div class="add_wrapper">
-      <header><h1>Flex !</h1></header>
+      <button class="back" onclick="goBack()">﹤</button>
+      <header>
+        <h1>사치의 즐거움 ❤️</h1>
+      </header>
       <main>
       <div class="url_wrapper" id="url_wrapper">
         <h2>Flex url :</h2>
@@ -108,7 +119,7 @@
           <li><span>제품명 :</span> <span id="item_title"></span><br/></li>
           <li><span>금액 : </span><span id="item_price"></span><br/></li>
           <li><span>구매일 :</span> <input id="item_date" type="date" required/><br/></li>
-          <li><span>할부 : </span><input id="item_months" type="number" placeholder="할부 기간을 써주세요!" required/></li>
+          <li><span>할부 : </span><input id="item_months" type="number" min="0" placeholder="할부 기간을 써주세요!" required/></li>
         </form>
         </ul>
         <div class="btn_wrapper">

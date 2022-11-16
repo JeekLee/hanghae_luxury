@@ -37,7 +37,6 @@
 
   }
   .add_wrapper {
-    padding-top: 100px;
     padding-bottom: 100px;
     margin: 100px;
     width: 100%;
@@ -45,7 +44,12 @@
     background-color: var(--color-point-2);
     border-radius: 10px;
   }
+  .back{
+    margin-top: 50px;
+    margin-left: 50px;
+  }
   header {
+    padding-top: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
