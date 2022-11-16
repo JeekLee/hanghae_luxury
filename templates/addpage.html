@@ -15,7 +15,17 @@
       showUrl();
       // showItem()
       // getItemFromUrl();
+
+    //   $('form').on("submit", function(event){
+    //   event.preventDefault();
+    //   saveItem()
+    // })
+    $('#form_info').submit(function(event){
+      event.preventDefault();
+      saveItem()
+    })
     });
+
     let imgSrc =
       "https://images.unsplash.com/photo-1510917065317-aa26965fe730?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MXw5MjY0ODIyfHxlbnwwfHx8fA%3D%3D&w=1000&q=80.jpg";
     const isValidUrl = $("#url").val() !== "";
@@ -48,6 +58,7 @@
         },
       });
     }
+
     function saveItem() {
       console.log("img", $("#item_img").attr("src"));
       console.log("item_title", $("#item_title").text());
@@ -66,12 +77,14 @@
         },
         success: function (response) {
           alert("저장 완료 !");
+          location.href = "/mainpage"
         },
       });
     }
     function cancelAdding() {
       showUrl();
     }
+
   </script>
   <body>
     <div class="add_wrapper">
@@ -93,13 +106,15 @@
           <img id="item_img" class="item_img" />
         </div>
         <ul class="info_container">
+          <form id="form_info">
           <li><span>제품명 :</span> <span id="item_title"></span><br/></li>
           <li><span>금액 : </span><span id="item_price"></span><br/></li>
-          <li><span>구매일 :</span> <input id="item_date" type="date" /><br/></li>
-          <li><span>할부 : </span><input id="item_months" type="number" placeholder="할부 기간을 써주세요!" /></li>
+          <li><span>구매일 :</span> <input id="item_date" type="date" required/><br/></li>
+          <li><span>할부 : </span><input id="item_months" type="number" placeholder="할부 기간을 써주세요!" required/></li>
+        </form>
         </ul>
         <div class="btn_wrapper">
-          <button class="btn" id="save" onclick="saveItem()">저장</button>
+          <button type="submit" form="form_info" class="btn" id="save" >저장</button>
           <button class="btn" id="cancel" onclick="cancelAdding()">취소</button>
         </div>
       </div>
