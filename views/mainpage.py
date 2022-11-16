@@ -29,7 +29,7 @@ def all_items_get():
         # payload 안에 id가 들어있습니다. 이 id로 유저정보를 찾습니다.
         # 여기에선 그 예로 닉네임을 보내주겠습니다.
 
-        items = list(db.items.find({'id': payload['id']}))
+        items = list(db.items.find({'userid': payload['id']}))
         for i in items:
             i['_id'] = str(i['_id'])
         return jsonify({'result': 'success', 'items': items})
