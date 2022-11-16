@@ -196,9 +196,9 @@ function delitem(){
     data: {},
     success: function(response) {
       alert(response["msg"])
-      window.location.reload()
     }
   });
+  window.location.href = "/mainpage";
 }
 
 // function to browse other item
