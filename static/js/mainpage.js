@@ -14,6 +14,11 @@ const remainMonthCalculate = (nowYear, nowMonth, startYear, startMonth, payMonth
     return remain
 }
 
+const onclickmypage = (id)=>{
+    // console.log(id)
+    location.href = "/itempage/name=" + id
+ }
+
 const buttonClick = (select)=>{
     select === 1 && $('.tags').text('#결국 #다내꾸')
     select === 2 && $('.tags').text('#아주 #잠시 #은행꺼')
@@ -28,6 +33,7 @@ const buttonClick = (select)=>{
                     let items = response["items"];
                     for (let i = 0; i < items.length; i++) {
                         let img = items[i]['image'];
+                        let itemId = items[i]['_id']
 
                         // 남은 달 구하기
                         let startDate = new Date(items[i]['date'])
@@ -44,8 +50,10 @@ const buttonClick = (select)=>{
                         let temp_html
                         if(select === 1){temp_html = `<div class="image">
                                               <img
+                                                id=${itemId}
                                                 src=${img}
                                                 alt="사고싶은 물건"
+                                              
                                               />
                                               <div class="circle">${textRemainMonth}</div>
                                            </div>`
@@ -53,8 +61,10 @@ const buttonClick = (select)=>{
 
                         else if(select === 2 && remainMonth > 0){temp_html = `<div class="image">
                                               <img
+                                                id=${itemId}
                                                 src=${img}
                                                 alt="사고싶은 물건"
+                                               
                                               />
                                               <div class="circle">${textRemainMonth}</div>
                                            </div>`
@@ -62,12 +72,15 @@ const buttonClick = (select)=>{
 
                         else if(select === 3 && remainMonth <= 0){temp_html = `<div class="image">
                                               <img
+                                                 id=${itemId}
                                                 src=${img}
                                                 alt="사고싶은 물건"
+                                               
                                               />
                                               <div class="circle">${textRemainMonth}</div>
                                            </div>`
                         $('.image-container').append(temp_html)}
+                        $(`#${itemId}`).click(()=>{onclickmypage(`${itemId}`)})
                     }
                 }
             })}
@@ -84,6 +97,7 @@ $(function() {
             let items = response["items"];
             for (let i = 0; i < items.length; i++) {
                 let img = items[i]['image'];
+                let itemId = items[i]['_id']
 
                 // 남은 달 구하기
                 let startDate = new Date(items[i]['date'])
@@ -101,13 +115,14 @@ $(function() {
 
                     temp_html = `<div class="image">
                                               <img
+                                                id=${itemId}
                                                 src=${img}
                                                 alt="사고싶은 물건"
                                               />
                                               <div class="circle">${textRemainMonth}</div>
                                            </div>`
                     $('.image-container').append(temp_html)
-
+                $(`#${itemId}`).click(()=>{onclickmypage(`${itemId}`)})
             }
         }
     })
@@ -124,4 +139,10 @@ $(function(){
 $(function(){
     $('.my-list-button').click(()=>{buttonClick(3)})
 })
+
+$(function() {
+    $('.add-button').click(()=>{location.href = '/addpage'})
+})
+
+
 

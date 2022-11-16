@@ -54,6 +54,7 @@ header button {
 
 header button:hover {
   background-color: #7853f6;
+ transform: scale(1.1);
 }
 
 header button:active {
@@ -139,6 +140,10 @@ footer button {
   font-weight: 500;
   font-size: 35px;
   margin: 20px;
+}
+
+footer button:hover {
+  transform: scale(1.1);
 }
 
 .graybackground {
