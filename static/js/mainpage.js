@@ -24,13 +24,20 @@ const buttonClick = (select)=>{
     select === 2 && $('.tags').text('#아주 #잠시 #은행꺼')
     select === 3 && $('.tags').text('#넌 #내꺼야!')
         $('.image-container').empty();
+         $('.text-container').empty();
             $.ajax({
                 type: "GET",
                 url: "/mainpage/getitems",
                 data: {},
-
                 success: function (response) {
                     let items = response["items"];
+                    if (items === undefined) {
+                        let temp_html
+                        temp_html = `
+                <h5 class="add-text">[+]<br><br>추가 버튼으로<br>내 사치템을 추가해 보세요<br><br>⬊ ⬊ ⬊ ⬊ ⬊</h5>
+            `
+                        $('.text-container').append(temp_html)
+                    } else {
                     for (let i = 0; i < items.length; i++) {
                         let img = items[i]['image'];
                         let itemId = items[i]['_id']
@@ -81,13 +88,18 @@ const buttonClick = (select)=>{
                                            </div>`
                         $('.image-container').append(temp_html)}
                         $(`#${itemId}`).click(()=>{onclickmypage(`${itemId}`)})
-                    }
+                    }}
+                },
+                error: function (response) {
+                        alert(response['responseJSON']['msg'])
+                        location.href =`/login`;
                 }
             })}
 
 $(function() {
     $('.tags').text('#결국 #다내꾸')
     $('.image-container').empty();
+    $('.text-container').empty();
     $.ajax({
         type: "GET",
         url: "/mainpage/getitems",
@@ -95,7 +107,14 @@ $(function() {
 
         success: function (response) {
             let items = response["items"];
-            for (let i = 0; i < items.length; i++) {
+            if (items === undefined) {
+                let temp_html
+                temp_html = `
+                    <h5 class="add-text">[+]<br><br>추가 버튼으로<br>내 사치템을 추가해 보세요<br><br>⬊ ⬊ ⬊ ⬊ ⬊</h5>
+                `
+                $('.text-container').append(temp_html)
+            }else{
+                for (let i = 0; i < items.length; i++) {
                 let img = items[i]['image'];
                 let itemId = items[i]['_id']
 
@@ -124,6 +143,8 @@ $(function() {
                     $('.image-container').append(temp_html)
                 $(`#${itemId}`).click(()=>{onclickmypage(`${itemId}`)})
             }
+            }
+
         }
     })
 })
