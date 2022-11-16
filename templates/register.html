@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--  CSS연결    -->
     <link rel="stylesheet" href="{{url_for('static', filename='css/register.css')}}"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -21,7 +22,7 @@
         <input type="password" id="register_pwd2" name="id"
                placeholder="RE-ENTER PASSWORD">
         <div id="verify_pwd2" class="msg"></div>
-        <button id="register_btn" class="register_btn" type="button" onclick="register()" disabled>가입하기</button>
+        <button id="register_btn" class="register_btn" type="button" disabled>가입하기</button>
     </form>
     <div class="go_login">
         <a href="{{ url_for('login.index') }}">로그인</a>

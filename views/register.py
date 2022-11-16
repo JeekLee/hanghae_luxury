@@ -30,16 +30,21 @@ def check_id():
     return jsonify(doc)
 
 # 회원가입 API
-@register.route("/api/register", methods=["POST"])
+@register.route("/apiregi", methods=["POST"])
 def api_register():
-    id_receive = request.form['id']
-    pw_receive = request.form['pwd']
+    id_receive = request.form['id_give']
+    pw_receive = request.form['pw_give']
 
-     # 비밀번호 해쉬
-    pw_hash = hashlib.sha256(pw_receive.encode('utf-8')).hexdigest()
+    user = db.user.find_one({'id': id_receive})
 
-    # DB 저장
-    db.user.insert_one({'id': id_receive, 'pwd': pw_hash})
+    if(user):
+        return jsonify({"message": "다시 시도 해 주세요."})
+
+    else:
+        pw_hash = hashlib.sha256(pw_receive.encode('utf-8')).hexdigest()
+
+        # DB 저장
+        db.user.insert_one({'id': id_receive, 'pwd': pw_hash})
 
     return jsonify({"message": "회원가입 성공!"})
 

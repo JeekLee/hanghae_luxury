@@ -17,38 +17,59 @@ $(document).ready(function () {
     console.log('register.js called');
 });
 
-function moveToLogin() {
-    console.log('move to login page');
-
-}
-
 //로그인 시 영어,숫자만
-$(document).ready(function(){
-  $("input[name=id]").keyup(function(event){
-   if (!(event.keyCode >=37 && event.keyCode<=40)) {
-    var inputVal = $(this).val();
-    $(this).val(inputVal.replace(/[^a-z0-9]/gi,''));
-   }
-  });
-});
+$(document).ready(function () {
+    $("input[name=id]").keyup(function (event) {
+        if (!(event.keyCode >= 37 && event.keyCode <= 40)) {
+            var inputVal = $(this).val();
+            $(this).val(inputVal.replace(/[^a-z0-9]/gi, ''));
+        }
+    })
+})
+
+var check = 0;
 
 //아이디 중복 검사
 function id_test() {
-    let ID = $('#id').val()
+    let ID = $('#register_id').val()
     $.ajax({
         type: "GET",
-        url: "/register/check" + ID,
+        url: "/register/check?id=" + ID,
         data: {id: ID},
         success: function (response) {
             console.log(response);
             alert(response['message']);
             console.log(response['success']);
+            check = 1;
             if (response['success'] == false) {
-                var input = document.getElementById("id");
+                var input = document.getElementById("register_id");
                 input.value = null;
             }
         }
-    });
+    })
+}
+
+// 암호화 등록, 데이터 POST
+function register() {
+
+    if (check == 0) {
+        alert('아이디 중복확인을 해주세요');
+    } else {
+        $.ajax({
+            type: "POST",
+            url: "/register/apiregi",
+            data: {
+                id_give: $('#register_id').val(),
+                pw_give: $('#register_pwd1').val(),
+            },
+            success: function (response) {
+                console.log("response");
+                alert('회원가입이 완료되었습니다.')
+                window.location.href = '/home/login'
+
+            }
+        })
+    }
 }
 
 
@@ -59,15 +80,13 @@ function verify() {
         REGISTER_ID.style.backgroundColor = "#EDEDED";
         VERIFY_ID.style.color = "#0095F6";
         VERIFY_ID.innerText = '사용 가능한 ID 형식입니다.';
-        VERIFY_ID.style.marginTop = "-10px";
-        VERIFY_ID.style.marginBottom = "10px";
+        VERIFY_ID.style.marginBottom = "15px";
         FLAGID = true;
     } else {
         REGISTER_ID.style.backgroundColor = "#f5dad7";
         VERIFY_ID.style.color = "red";
         VERIFY_ID.innerText = 'ID는 5글자 이상, 15글자 이하 영문, 숫자 입력이 가능합니다.';
-        VERIFY_ID.style.marginTop = "-10px";
-        VERIFY_ID.style.marginBottom = "10px";
+        VERIFY_ID.style.marginBottom = "15px";
         FLAGID = false;
     }
 
@@ -85,15 +104,13 @@ function verify() {
         REGISTER_PWD1.style.backgroundColor = "#EDEDED";
         VERIFY_PWD1.style.color = "#0095F6";
         VERIFY_PWD1.innerText = '사용 가능한 PW입니다.';
-        VERIFY_PWD1.style.marginTop = "-10px";
-        VERIFY_PWD1.style.marginBottom = "10px";
+        VERIFY_PWD1.style.marginBottom = "15px";
         FLAGPW1 = true;
     } else {
         REGISTER_PWD1.style.backgroundColor = "#f5dad7";
         VERIFY_PWD1.style.color = "red";
         VERIFY_PWD1.innerText = 'PW는 5글자 이상, 15글자 이하 영문, 숫자 입력이 가능합니다.';
-        VERIFY_PWD1.style.marginTop = "-10px";
-        VERIFY_PWD1.style.marginBottom = "10px";
+        VERIFY_PWD1.style.marginBottom = "15px";
         FLAGPW1 = false;
     }
 
@@ -110,7 +127,7 @@ function verify() {
         FLAGPW2 = false;
     }
 
-    // 확인, 중복확인 버튼 클릭 후 회원가입 버튼 활성화 (아직 미구현)
+    // 조건 충족시 회원가입 버튼 활성화
     if (FLAGID == true && FLAGPW1 == true && FLAGPW2 == true) {
         REGISTER_BTN.style.backgroundColor = "#7853F6";
         REGISTER_BTN.disabled = false;
@@ -120,30 +137,8 @@ function verify() {
     }
 }
 
-// 암호화 등록, 데이터 POST
-function register() {
-
-    $.ajax({
-        type: "POST",
-        url: "/register/post",
-        async: false,
-        data: {
-            id_give: $('#id').val(),
-            pw_give: $('#pwd').val(),
-        },
-        success: function (response) {
-            if (response['result'] == 'success') {
-                alert("회원가입이 완료되었습니다.")
-                window.location.href = '/login'
-            } else {
-                alert(response['msg'])
-            }
-        }
-    });
-    moveToLogin();
-    return
-}
 
 REGISTER_ID.addEventListener('keyup', verify);
 REGISTER_PWD1.addEventListener('keyup', verify);
 REGISTER_PWD2.addEventListener('keyup', verify);
+REGISTER_BTN.addEventListener('click', register);

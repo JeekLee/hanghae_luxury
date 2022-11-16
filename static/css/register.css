@@ -101,3 +101,77 @@ form input {
     color: var(--color-graywhite);
     text-decoration: none;
 }
+
+@media (max-width: 500px){
+    .register_wrapper {
+    padding: 90px 27.5px;
+    margin: 190px auto;
+    text-align: center;
+}
+
+h1 {
+    font-size: 20px;
+    color: var(--color-graywhite);
+    margin-bottom: 15px;
+}
+
+form input {
+    font-size: 7.5px;
+    width: 140px;
+    outline: none;
+    border: 0.5px solid #fff;
+    padding: 6px 7.5px;
+    margin-bottom: 12.5px;
+    border-radius: 12.5px;
+}
+.overlap_btn {
+    width: 27.5px;
+    height: 25px;
+    border-radius: 7.5px;
+    outline: none;
+    border: none;
+    background: var(--color-point-2);
+    color: var(--color-graywhite);
+    font-size: 4px;
+    padding: 1.5px 4px;
+    text-align: center;
+    transition: all 0.9s;
+    position: absolute;
+    margin-left: 162.5px;
+    top: 336px;
+    cursor: pointer;
+    word-wrap: break-word;
+
+}
+
+.register_btn {
+    font-size: 10px;
+    margin-top: 10px;
+    padding: 5px 0;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    width: 100px;
+    color: var(--color-graywhite);
+    cursor: pointer;
+    background: var(--color-point-2);
+    text-align: center;
+    transition: all 0.9s;
+}
+
+.register_btn:hover {
+    box-shadow: 120px 0 0 0 rgba(0, 0, 0, 0.25) inset,
+    -120px 0 0 0 rgba(0, 0, 0, 0.25) inset;
+}
+
+.go_login {
+    font-size: 10px;
+    margin-top: 25px;
+    color: var(--color-graywhite);
+
+}
+.go_login a {
+    color: var(--color-graywhite);
+    text-decoration: none;
+}
+}
