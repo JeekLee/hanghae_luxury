@@ -36,9 +36,15 @@ body {
   overflow: hidden;
 
 }
+.log-out {
+  padding: 20px;
+  color: var(--color-graywhite);
+  font-family: var(--font-basic);
+  cursor: pointer;
+}
 
 header {
-  margin-top: 50px;
+  margin-top: 10px;
   display: flex;
   justify-content: center;
 }
@@ -65,7 +71,7 @@ header button:active {
 }
 
 main {
-  margin-top: 90px;
+  margin-top: 60px;
   width: 100vw;
   height: 55vh;
   display: flex;
@@ -91,7 +97,7 @@ main h5 {
 }
 
 .main-container {
-    margin-top: 22px;
+    margin-top: 15px;
     border-radius: 15px;
   overflow: auto;
 }
