@@ -3,6 +3,7 @@ from pymongo import MongoClient
 import hashlib
 import datetime
 import jwt
+import certifi
 
 client = MongoClient('mongodb+srv://Luxury:hanghae99@luxury.uhfyrvo.mongodb.net/Luxury?retryWrites=true&w=majority')
 db = client.Luxury
@@ -10,7 +11,6 @@ db = client.Luxury
 SECRET_KEY = 'SPARTA'
 
 login = Blueprint("login", __name__, template_folder="templates")
-
 
 @login.route('/login')
 def index():
@@ -21,8 +21,7 @@ def index():
 def register():
     return render_template('register.html')
 
-
-@login.route("/apilogin", methods=["POST"])
+@login.route("/login/api/tklogin", methods=["POST"])
 def api_login():
     id_receive = request.form['id_give']
     pw_receive = request.form['pw_give']

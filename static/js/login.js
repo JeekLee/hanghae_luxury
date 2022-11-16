@@ -29,10 +29,11 @@ $(document).ready(function () {
 function login() {
     $.ajax({
         type: "POST",
-        url: "/login/apilogin",
+        url: "/login/api/tklogin",
         data: {
             id_give: $('#login_id').val(),
-            pw_give: $('#login_pwd').val()},
+            pw_give: $('#login_pwd').val(),
+        },
         success: function (response) {
             if (response['result'] == 'success') {
                 //로그인이 정상적으로 되면, 토큰을 받아온다.
@@ -40,7 +41,7 @@ function login() {
                 $.cookie('mytoken', response['token']);
 
                 alert('로그인 완료!')
-                window.location.href = '/'
+                window.location.href = '/'  //로그인 완료 되면 메인페이지로 ?
             } else {
                 //로그인이 안되면 에러메시지를 띄운다.
                 alert(response['msg'])
@@ -85,6 +86,7 @@ function verify() {
         LOGIN_BTN.disabled = true;
     }
 }
+
 LOGIN_ID.addEventListener('keyup', verify);
 LOGIN_PWD.addEventListener('keyup', verify);
 LOGIN_BTN.addEventListener('click', login);

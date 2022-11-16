@@ -8,7 +8,7 @@ from views.itempage import itempage
 
 app = Flask(__name__)
 
-app.register_blueprint(login, url_prefix="/home")
+app.register_blueprint(login, url_prefix="/login")
 app.register_blueprint(register, url_prefix="/register")
 app.register_blueprint(mainpage, url_prefix="/mainpage")
 app.register_blueprint(addpage, url_prefix="/addpage")
@@ -16,7 +16,7 @@ app.register_blueprint(itempage, url_prefix="/itempage")
 
 @app.route("/")
 def hello_world():
-    return render_template("mainpage.html")
+    return render_template("login.html")
 
 
 if __name__ == '__main__':

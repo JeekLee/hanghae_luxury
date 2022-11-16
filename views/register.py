@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request, jsonify
 from pymongo import MongoClient
 import hashlib
+import certifi 
 
 client = MongoClient('mongodb+srv://Luxury:hanghae99@luxury.uhfyrvo.mongodb.net/Luxury?retryWrites=true&w=majority')
 db = client.Luxury
@@ -30,7 +31,7 @@ def check_id():
     return jsonify(doc)
 
 # 회원가입 API
-@register.route("/apiregi", methods=["POST"])
+@register.route("/api/regi", methods=["POST"])
 def api_register():
     id_receive = request.form['id_give']
     pw_receive = request.form['pw_give']

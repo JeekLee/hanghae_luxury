@@ -57,7 +57,7 @@ function register() {
     } else {
         $.ajax({
             type: "POST",
-            url: "/register/apiregi",
+            url: "/register/api/regi",
             data: {
                 id_give: $('#register_id').val(),
                 pw_give: $('#register_pwd1').val(),
