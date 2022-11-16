@@ -7,7 +7,7 @@ const leftBtn = document.getElementById('NAV_LEFT');
 const rightBtn = document.getElementById('NAV_RIGHT');
 
 // variables get from DB
-let name, price, pay_per_month, start_date, img, complete, item_list, this_objectId, this_index;
+let name, price, pay_per_month, start_date, img, complete, item_list, this_objectId, this_index, months;
 // Global Variables
 let payedMonth = 0;
 let leftMonth = 0;
@@ -15,7 +15,7 @@ let leftMonth = 0;
 const searchParams = new URLSearchParams(location.search);
 
 for (const param of searchParams) {
-  this_objectId = param[1]
+  this_objectId = param[1];
 }
 
 // function activates when DOMtree is organized
@@ -25,7 +25,13 @@ $(document).ready(function() {
 
   get_item();
   this_index = get_item_list();
+  pay_per_month = parseInt(price/months);
+
   calc_leftmonth(start_date);
+  if (leftMonth <= 0){
+    complete_item();
+    complete == true;
+  }
 
   to_html_img(img);
   to_html_info(name, price);
@@ -43,6 +49,9 @@ $(document).ready(function() {
 function calc_leftmonth(date){
   let now = new Date();
   payedMonth = parseInt((now.getTime() - start_date.getTime())/(1000*60*60*24*30));
+  if (now.getTime() - start_date.getTime() < 0){
+    payedMonth = 0;
+  }
   leftMonth = Math.ceil((price - payedMonth*pay_per_month) / pay_per_month);
 }
 
@@ -57,8 +66,8 @@ function to_html_img(img){
 }
 function to_html_info(name, price){
   let post = document.querySelector("#TXT_INFO");
-  let tmp = `<span style="font-size:4vh">${name}</span>
-            <span style="font-size:2.5vh">${price}원</span>`;
+  let tmp = `<span style="font-size:2vh">${name}</span>
+            <span style="font-size:3vh">${price}원</span>`;
   while(post.firstChild){
       post.removeChild(post.firstChild);
   }
@@ -111,7 +120,7 @@ function to_html_drip(pay_per_month){
 }
 function to_html_complete(name){
   let post = document.querySelector("#TXT_MONTH");
-  let tmp = `<span style="font-size:2.5vh">이제 이 ${name}은 제껍니다.</span>`;
+  let tmp = `<span style="font-size:1.7vh">이제 이 ${name}은 제껍니다.</span>`;
   while(post.firstChild){
       post.removeChild(post.firstChild);
   }
@@ -141,10 +150,10 @@ function get_item(){
        success: function(response) {
          console.log("Item info");
          console.log(response);
-         name = response['name'];
+         name = response['title'];
          price = response['price'];
-         pay_per_month = response['pay_per_month'];
-         start_date = new Date(response['start_date']);
+         months = response['months'];
+         start_date = new Date(response['date']);
          img = response['image'];
          complete = response['complete'];
        }
@@ -195,20 +204,20 @@ function delitem(){
 // function to browse other item
 function to_left_item(){
   if (this_index - 1 < 0){
-    alert("첫번째 게시물입니다.");
+    alert("첫번째 아이템입니다.");
     return;
   }
   console.log("To left item");
-  var url = "/itempage?item=" + item_list[this_index-1]['_id'];
+  var url = "/itempage?name=" + item_list[this_index-1]['_id'];
   window.location.href = url;
 }
 function to_right_item(){
   if (this_index + 1 > item_list.length - 1){
-    alert("마지막 게시물입니다.");
+    alert("마지막 아이템입니다.");
     return;
   }
   console.log("To right item");
-  var url = "/itempage?item=" + item_list[this_index+1]['_id'];
+  var url = "/itempage?name=" + item_list[this_index+1]['_id'];
   window.location.href = url;
 }
 
