@@ -92,7 +92,7 @@ const buttonClick = (select)=>{
                 },
                 error: function (response) {
                         alert(response['responseJSON']['msg'])
-                        location.href =`/login`;
+                        location.href ='/';
                 }
             })}
 
@@ -145,6 +145,10 @@ $(function() {
             }
             }
 
+        },
+        error: function (response) {
+            alert(response['responseJSON']['msg'])
+            location.href = '/';
         }
     })
 })

@@ -32,6 +32,9 @@
 
 body {
   width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+
 }
 
 header {
@@ -68,7 +71,6 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-
 }
 
 main h5 {
@@ -81,12 +83,16 @@ main h5 {
 }
 
 .image-container {
-  margin-top: 22px;
+
   display: grid;
   width: 85vw;
   grid-template-columns: repeat(2, 1fr);
   gap: 15px;
-  border-radius: 15px;
+}
+
+.main-container {
+    margin-top: 22px;
+    border-radius: 15px;
   overflow: auto;
 }
 
