@@ -44,9 +44,7 @@
       $.ajax({
         type: "POST",
         url: "/addpage/url",
-        // data: { url_give: $("#url").val() },
-        data: { url_give: "https://smartstore.naver.com/buybicycle/products/5480169695?NaPm=ct%3Dlaj1aga8%7Cci%3D0a293bd47c84e9c983a20eef0b14f5963f019f69%7Ctr%3Dslsc%7Csn%3D270658%7Chk%3D71942435e3057d0407776c97a23f73ba489c0fe8" },
-
+        data: { url_give: $("#url").val() },
 
         success: function (response) {
           console.log("response", response);
