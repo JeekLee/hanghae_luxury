@@ -21,6 +21,8 @@ for (const param of searchParams) {
 // function activates when DOMtree is organized
 $(document).ready(function() {
   console.log('itempage.js called');
+  $('ITEM_WRAP').fadeIn();
+
   get_item();
   this_index = get_item_list();
   calc_leftmonth(start_date);
@@ -37,11 +39,14 @@ $(document).ready(function() {
     to_html_drip(pay_per_month);
   }
 });
+
 function calc_leftmonth(date){
   let now = new Date();
   payedMonth = parseInt((now.getTime() - start_date.getTime())/(1000*60*60*24*30));
   leftMonth = Math.ceil((price - payedMonth*pay_per_month) / pay_per_month);
 }
+
+// innerHTML functions
 function to_html_img(img){
   let post = document.querySelector("#ITEM_IMG");
   let tmp = `<img src="${img}">`;
@@ -126,7 +131,7 @@ function remove_btn(){
   }
 }
 
-// function to get data from // DB
+// function to control data in DB
 function get_item(){
   $.ajax({
        type: 'GET',
@@ -186,7 +191,6 @@ function delitem(){
     }
   });
 }
-
 
 // function to browse other item
 function to_left_item(){
