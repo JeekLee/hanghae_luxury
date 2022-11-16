@@ -2,13 +2,14 @@ from flask import Blueprint, render_template, request, jsonify
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 import certifi
+from flask_jwt_extended import get_jwt_identity, jwt_required
 
 
 client = MongoClient("mongodb+srv://admin:admin@cluster0.uuxjj5e.mongodb.net/?retryWrites=true&w=majority", tlsCAFile=certifi.where())
 db = client.Luxury
-
 itempage = Blueprint("itempage", __name__, template_folder="templates", url_prefix="/itempage")
 
+# Global Variables
 global tmp
 global user
 user = "test01"
@@ -16,6 +17,7 @@ user = "test01"
 @itempage.route('/')
 def index():
     global tmp
+    global user
     tmp = request.args.get('item')
     return render_template('itempage.html')
 
