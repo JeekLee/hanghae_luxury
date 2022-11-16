@@ -110,49 +110,51 @@ form input {
 }
 
 h1 {
-    font-size: 20px;
+    font-size: 25px;
     color: var(--color-graywhite);
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 form input {
-    font-size: 7.5px;
-    width: 140px;
+    font-size: 14px;
+    width: 195px;
     outline: none;
-    border: 0.5px solid #fff;
+    border: 1px solid #fff;
     padding: 6px 7.5px;
-    margin-bottom: 12.5px;
-    border-radius: 12.5px;
+    margin-bottom: 16.5px;
+    border-radius: 16.5px;
 }
 .overlap_btn {
-    width: 27.5px;
-    height: 25px;
-    border-radius: 7.5px;
+    width: 40px;
+    height: 35px;
+    border-radius: 10px;
     outline: none;
     border: none;
     background: var(--color-point-2);
     color: var(--color-graywhite);
-    font-size: 2px;
-    font-m
-    padding: 2px 4px;
+    font-size: 3px;
+    padding: 0px 2px;
     text-align: center;
     transition: all 0.9s;
     position: absolute;
-    margin-left: 162.5px;
-    top: 336px;
+    margin-left: 222px;
+    top: 347px;
     cursor: pointer;
     white-space:nowrap;
 
 }
+.overlap_btn:hover {
+    box-shadow: 60px 0 0 0 rgba(0, 0, 0, 0.25) inset
+}
 
 .register_btn {
-    font-size: 10px;
-    margin-top: 10px;
-    padding: 5px 0;
-    border-radius: 10px;
+    font-size: 14px;
+    margin-top: 14px;
+    padding: 7px 0;
+    border-radius: 15px;
     outline: none;
     border: none;
-    width: 100px;
+    width: 150px;
     color: var(--color-graywhite);
     cursor: pointer;
     background: var(--color-point-2);
@@ -161,12 +163,12 @@ form input {
 }
 
 .register_btn:hover {
-    box-shadow: 120px 0 0 0 rgba(0, 0, 0, 0.25) inset,
-    -120px 0 0 0 rgba(0, 0, 0, 0.25) inset;
+    box-shadow: 170px 0 0 0 rgba(0, 0, 0, 0.25) inset,
+    -170px 0 0 0 rgba(0, 0, 0, 0.25) inset;
 }
 
 .go_login {
-    font-size: 10px;
+    font-size: 15px;
     margin-top: 25px;
     color: var(--color-graywhite);
 
