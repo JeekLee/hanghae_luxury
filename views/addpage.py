@@ -1,5 +1,5 @@
 from datetime import datetime
-from flask import Blueprint, Flask, render_template, request, jsonify
+from flask import Blueprint, Flask, render_template, request, jsonify, url_for, redirect
 from pymongo import MongoClient
 import requests
 from bs4 import BeautifulSoup
@@ -61,15 +61,12 @@ def item_post():
                'price': price_receive,
                'date': date_receive,
                'months': months_receive,
-               'complete':False
+               'complete': False
                }
         print(doc)
         db.items.insert_one(doc)
         return jsonify({'msg': "success"})
     except jwt.ExpiredSignatureError:
-        # 위를 실행했는데 만료시간이 지났으면 에러가 납니다.
-        print("fail01")
-        return jsonify({'result': 'fail', 'msg': '로그인 시간이 만료되었습니다.'})
+        return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
     except jwt.exceptions.DecodeError:
-        print("fail02")
-        return jsonify({'result': 'fail', 'msg': '로그인 정보가 존재하지 않습니다.'})
+        return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
