@@ -132,15 +132,16 @@ form input {
     border: none;
     background: var(--color-point-2);
     color: var(--color-graywhite);
-    font-size: 4px;
-    padding: 1.5px 4px;
+    font-size: 2px;
+    font-m
+    padding: 2px 4px;
     text-align: center;
     transition: all 0.9s;
     position: absolute;
     margin-left: 162.5px;
     top: 336px;
     cursor: pointer;
-    word-wrap: break-word;
+    white-space:nowrap;
 
 }
 
