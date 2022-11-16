@@ -8,8 +8,6 @@ from bson.objectid import ObjectId
 
 client = MongoClient('mongodb+srv://Luxury:hanghae99@luxury.uhfyrvo.mongodb.net/Luxury?retryWrites=true&w=majority',tlsCAFile=certifi.where())
 db = client.Luxury
-# client = MongoClient('mongodb+srv://mugyeol:spartan@cluster0.n9bnorv.mongodb.net/?retryWrites=true&w=majority',tlsCAFile=certifi.where())
-# db = client.dbsparta
 
 addpage = Blueprint("addpage", __name__, template_folder="templates")
 
@@ -27,7 +25,6 @@ def get_url():
 
     soup = BeautifulSoup(data.text, 'html.parser')
     
-    # price=""
     price = soup.select_one('#content > div > div._2-I30XS1lA > div._2QCa6wHHPy > fieldset > div._1ziwSSdAv8 > div.WrkQhIlUY0 > div > strong > span._1LY7DqCnwR').text
     title = soup.select_one('meta[property="og:title"]')['content']
     image = soup.select_one('meta[property="og:image"]')['content']
