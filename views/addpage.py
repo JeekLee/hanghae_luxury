@@ -13,9 +13,21 @@ import jwt
 
 addpage = Blueprint("addpage", __name__, template_folder="templates")
 
+
 @addpage.route('/')
 def home():
-    return render_template('addpage.html')
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, os.getenv('SECRET_KEY'), algorithms=['HS256'])
+        print(payload)
+        return render_template("addpage.html")
+
+    except jwt.ExpiredSignatureError:
+        print("Token Expired")
+        return redirect(url_for('login.index', status="expired_token"))
+    except jwt.exceptions.DecodeError:
+        print("Token decoding failed")
+        return redirect(url_for('login.index', status="invalid_token"))
 
 
 @addpage.route('/url', methods=["POST"])
@@ -47,23 +59,17 @@ def item_post():
     price_receive = int(request.form.get('price_give'))
     date_receive = datetime.strptime(request.form.get('date_give'), '%Y-%m-%d')
     months_receive = request.form.get('months_give')
-    try:
-        # token을 시크릿키로 디코딩합니다.
-        # 보실 수 있도록 payload를 print 해두었습니다. 우리가 로그인 시 넣은 그 payload와 같은 것이 나옵니다.
-        payload = jwt.decode(token_receive, os.getenv('SECRET_KEY'), algorithms=['HS256'])
-        print(payload)
-        doc = {'userid': payload['id'],
-               'title': title_receive,
-               'image': img_receive,
-               'price': price_receive,
-               'date': date_receive,
-               'months': months_receive,
-               'complete': False
-               }
-        print(doc)
-        db.items.insert_one(doc)
-        return jsonify({'msg': "success"})
-    except jwt.ExpiredSignatureError:
-        return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
-    except jwt.exceptions.DecodeError:
-        return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
+    payload = jwt.decode(token_receive, os.getenv('SECRET_KEY'), algorithms=['HS256'])
+    print(payload)
+    doc = {'userid': payload['id'],
+            'title': title_receive,
+            'image': img_receive,
+            'price': price_receive,
+            'date': date_receive,
+            'months': months_receive,
+            'complete': False
+            }
+    print(doc)
+    db.items.insert_one(doc)
+    return jsonify({'msg': "success"})
+
