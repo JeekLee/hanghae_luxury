@@ -1,8 +1,10 @@
 from datetime import datetime
 from flask import Blueprint, Flask, render_template, request, jsonify, url_for, redirect
+
 from db import db
 from dotenv import load_dotenv
 import os
+from pymongo import MongoClient
 import requests
 from bs4 import BeautifulSoup
 import certifi
@@ -48,7 +50,7 @@ def item_post():
     try:
         # token을 시크릿키로 디코딩합니다.
         # 보실 수 있도록 payload를 print 해두었습니다. 우리가 로그인 시 넣은 그 payload와 같은 것이 나옵니다.
-        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        payload = jwt.decode(token_receive, os.getenv('SECRET_KEY'), algorithms=['HS256'])
         print(payload)
         doc = {'userid': payload['id'],
                'title': title_receive,
