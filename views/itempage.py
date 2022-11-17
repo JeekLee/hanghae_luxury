@@ -1,12 +1,12 @@
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for
-from pymongo import MongoClient
+
+from db import db
+from dotenv import load_dotenv
+import os
 from bson.objectid import ObjectId
 import certifi
 import jwt
 
-
-client = MongoClient('mongodb+srv://Luxury:hanghae99@luxury.uhfyrvo.mongodb.net/Luxury?retryWrites=true&w=majority', tlsCAFile=certifi.where())
-db = client.Luxury
 itempage = Blueprint("itempage", __name__, template_folder="templates", url_prefix="/itempage")
 
 # Global Variables
@@ -21,7 +21,7 @@ def index():
     token_receive = request.cookies.get('mytoken')
     try:
         # get user id from token
-        payload = jwt.decode(token_receive, "SPARTA", algorithms=['HS256']) # decode token
+        payload = jwt.decode(token_receive, os.getenv('SECRET_KEY'), algorithms=['HS256']) # decode token
         user = payload['id'] # save user id at global variable
 
         # get item name from url parameter

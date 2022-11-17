@@ -1,14 +1,11 @@
 from flask import Blueprint, render_template, request, jsonify, url_for, redirect
-from pymongo import MongoClient
+from db import db
+from dotenv import load_dotenv
+import os
 import hashlib
 import datetime
 import jwt
 import certifi
-
-client = MongoClient('mongodb+srv://Luxury:hanghae99@luxury.uhfyrvo.mongodb.net/Luxury?retryWrites=true&w=majority')
-db = client.Luxury
-
-SECRET_KEY = 'SPARTA'
 
 login = Blueprint("login", __name__, template_folder="templates")
 
@@ -42,43 +39,10 @@ def api_login():
             'id': id_receive,
             'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=15)  #나중에 minute 로 변경
         }
-        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
+        token = jwt.encode(payload, os.getenv('SECRET_KEY'), algorithm='HS256')
 
         # token을 준다.
         return jsonify({'result': 'success', 'token': token})
     # 찾지 못하면
     else:
         return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
-
-
-@login.route('/login/api/id', methods=['GET'])
-def api_valid():
-    token_receive = request.cookies.get('mytoken')
-
-    try:
-        # token을 시크릿키로 디코딩합니다.
-        # 보실 수 있도록 payload를 print 해두었습니다. 우리가 로그인 시 넣은 그 payload와 같은 것이 나옵니다.
-        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        print(payload)
-
-        # payload 안에 id가 들어있습니다. 이 id로 유저정보를 찾습니다.
-        userinfo = db.user.find_one({'id': payload['id']}, {'_id': 0})
-        return jsonify({'result': 'success', 'user_id': userinfo['id']})
-    except jwt.ExpiredSignatureError:
-        # 위를 실행했는데 만료시간이 지났으면 에러가 납니다.
-        return jsonify({'result': 'fail', 'msg': '로그인 시간이 만료되었습니다.'})
-    except jwt.exceptions.DecodeError:
-        return jsonify({'result': 'fail', 'msg': '로그인 정보가 존재하지 않습니다.'})
-
-
-@login.route('/')
-def home():
-    token_receive = request.cookies.get('mytoken')
-    try:
-        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        user_info = db.user.find_one({"id": payload['id']})
-        return render_template('mainpage.html', ID=user_info["id"])    #메인페이지로?
-    except jwt.ExpiredSignatureError:
-        return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
-    except jwt.exceptions.DecodeError:
-        return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
