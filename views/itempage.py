@@ -20,7 +20,7 @@ def index():
     token_receive = request.cookies.get('mytoken')
     try:
         # get user id from token
-        payload = jwt.decode(token_receive, "SPARTA", algorithms=['HS256']) # decode token
+        payload = jwt.decode(token_receive, os.getenv('SECRET_KEY'), algorithms=['HS256']) # decode token
         user = payload['id'] # save user id at global variable
 
         # get item name from url parameter
