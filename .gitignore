@@ -63,6 +63,8 @@ cover/
 # Translations
 *.mo
 *.pot
+.idea
+.gitignore
 
 # Django stuff:
 *.log
@@ -147,4 +149,4 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
-
+*.ps1

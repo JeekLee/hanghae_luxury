@@ -1,9 +1,12 @@
 from flask import Blueprint, render_template, request, jsonify
+
 from db import db
 from dotenv import load_dotenv
 import os
-from bson.objectid import ObjectId
 import certifi
+import jwt
+
+
 import jwt
 
 ca = certifi.where()

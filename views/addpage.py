@@ -1,8 +1,10 @@
 from datetime import datetime
 from flask import Blueprint, Flask, render_template, request, jsonify, url_for, redirect
+
 from db import db
 from dotenv import load_dotenv
 import os
+from pymongo import MongoClient
 import requests
 from bs4 import BeautifulSoup
 import certifi

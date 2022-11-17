@@ -1,10 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Title</title>
-</head>
-<body>
 
-</body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <link rel="stylesheet" href="../static/css/addpage.css" />
+  </head>
+  <style>
+
+  </style>
+  <script>
+    $(document).ready(function () {
+      showUrl();
+    $('#form_info').submit(function(event){
+      event.preventDefault();
+      saveItem()
+    })
+    });
+
+    const isValidUrl = $("#url").val() !== "";
+
+    function showUrl() {
+      $("#url").val("");
+      $("#item_date").val("")
+      $("#item_months").val("")
+      $("#url_wrapper").show() && $("#item").hide();
+    }
+    function showItem() {
+      $("#url_wrapper").hide() && $("#item").show();
+    }
+    function getItemFromUrl() {
+      $.ajax({
+        type: "POST",
+        url: "/addpage/url",
+        data: { url_give: $("#url").val() },
+
+        success: function (response) {
+          console.log("response", response);
+          console.log(response["image"]);
+          $("#item_title").text(response["title"]);
+          $("#item_price").text(response["price"]);
+          $("#item_img").attr("src", response["image"]);
+          showItem();
+        },
+      });
+    }
+
+    function saveItem() {
+      $.ajax({
+        type: "POST",
+        url: "/addpage/adding",
+        data: {
+          img_give: $("#item_img").attr("src"),
+          title_give: $("#item_title").text(),
+          price_give: Number($("#item_price").text().replaceAll(",", "")),
+          date_give: $("#item_date").val(),
+          months_give: $("#item_months").val(),
+        },
+        success: function (response) {
+          if(response['msg']==="success"){
+            alert("저장 완료 !");
+            location.href = "/mainpage"
+          }
+        },
+      });
+    }
+    function cancelAdding() {
+      showUrl();
+    }
+    function goBack(){
+      history.back()
+    }
+
+  </script>
+  <body>
+    <div class="add_wrapper">
+      <button class="back" onclick="goBack()">﹤</button>
+      <header>
+        <h1>사치의 즐거움 ❤️</h1>
+      </header>
+      <main>
+      <div class="url_wrapper" id="url_wrapper">
+        <h2>Flex url :</h2>
+        <input
+          id="url"
+          autocomplete="off"
+        >
+        <button onclick="getItemFromUrl()">확인</button>
+      </div>
+      <div class="item_wrapper" id="item">
+        <div class="item_container">
+        <div class="img_wrapper" id="img_wrapper">
+          <img id="item_img" class="item_img" />
+        </div>
+        <ul class="info_container">
+          <form id="form_info">
+          <li><span>제품명 :</span> <span id="item_title"></span><br/></li>
+          <li><span>금액 : </span><span id="item_price"></span><br/></li>
+          <li><span>구매일 :</span> <input id="item_date" type="date" required/><br/></li>
+          <li><span>할부 : </span><input id="item_months" type="number" min="0" placeholder="할부 기간을 써주세요!" required/></li>
+        </form>
+        </ul>
+        <div class="btn_wrapper">
+          <button type="submit" form="form_info" class="btn" id="save" >저장</button>
+          <button class="btn" id="cancel" onclick="cancelAdding()">취소</button>
+        </div>
+      </div>
+      </div>
+    </div>
+  </main>
+  </body>
 </html>

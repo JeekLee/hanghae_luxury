@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for
+
 from db import db
 from dotenv import load_dotenv
 import os
