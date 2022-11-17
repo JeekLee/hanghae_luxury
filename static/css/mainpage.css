@@ -38,6 +38,7 @@ body {
 }
 .log-out {
   padding: 20px;
+  width: 70px;
   color: var(--color-graywhite);
   font-family: var(--font-basic);
   cursor: pointer;
