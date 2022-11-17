@@ -7,9 +7,6 @@ import datetime
 import jwt
 import certifi
 
-client = MongoClient('mongodb+srv://Luxury:hanghae99@luxury.uhfyrvo.mongodb.net/Luxury?retryWrites=true&w=majority')
-db = client.Luxury
-
 login = Blueprint("login", __name__, template_folder="templates")
 
 @login.route('/login')
@@ -42,7 +39,7 @@ def api_login():
             'id': id_receive,
             'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=15)  #나중에 minute 로 변경
         }
-        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
+        token = jwt.encode(payload, os.getenv('SECRET_KEY'), algorithm='HS256')
 
         # token을 준다.
         return jsonify({'result': 'success', 'token': token})

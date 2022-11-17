@@ -9,14 +9,7 @@ import certifi
 from bson.objectid import ObjectId
 import jwt
 
-client = MongoClient(
-    'mongodb+srv://Luxury:hanghae99@luxury.uhfyrvo.mongodb.net/Luxury?retryWrites=true&w=majority', tlsCAFile=certifi.where())
-db = client.Luxury
-
 addpage = Blueprint("addpage", __name__, template_folder="templates")
-
-SECRET_KEY = 'SPARTA'
-
 
 @addpage.route('/')
 def home():

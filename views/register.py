@@ -2,9 +2,9 @@ from flask import Blueprint, render_template, request, jsonify
 from pymongo import MongoClient
 import hashlib
 import certifi 
-
-client = MongoClient('mongodb+srv://Luxury:hanghae99@luxury.uhfyrvo.mongodb.net/Luxury?retryWrites=true&w=majority')
-db = client.Luxury
+from db import db
+from dotenv import load_dotenv
+import os
 
 register = Blueprint("register", __name__, template_folder="templates")
 

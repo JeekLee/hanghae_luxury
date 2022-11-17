@@ -6,6 +6,8 @@ from views.mainpage import mainpage
 from views.addpage import addpage
 from views.itempage import itempage
 import os
+from dotenv import load_dotenv
+from db import db
 
 
 app = Flask(__name__)

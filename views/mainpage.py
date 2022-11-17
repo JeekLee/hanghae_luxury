@@ -7,13 +7,7 @@ import certifi
 
 import jwt
 
-SECRET_KEY = 'SPARTA'
-
-
 ca = certifi.where()
-
-client = MongoClient('mongodb+srv://Luxury:hanghae99@luxury.uhfyrvo.mongodb.net/Luxury?retryWrites=true&w=majority', tlsCAFile=ca)
-db = client.Luxury
 
 mainpage = Blueprint("mainpage", __name__, template_folder="templates")
 
