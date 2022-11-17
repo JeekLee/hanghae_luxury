@@ -30,32 +30,36 @@ const buttonClick = (select)=>{
                 url: "/mainpage/getitems",
                 data: {},
                 success: function (response) {
-                    let items = response["items"];
-                    if (items === undefined) {
-                        let temp_html
-                        temp_html = `
+                    console.log(response)
+
+                    if (response['result']==='success') {
+                        let items = response["items"];
+                        if (items === undefined) {
+                            let temp_html
+                            temp_html = `
                 <h5 class="add-text">[+]<br><br>추가 버튼으로<br>내 사치템을 추가해 보세요<br><br>⬊ ⬊ ⬊ ⬊ ⬊</h5>
             `
-                        $('.text-container').append(temp_html)
-                    } else {
-                    for (let i = 0; i < items.length; i++) {
-                        let img = items[i]['image'];
-                        let itemId = items[i]['_id']
+                            $('.text-container').append(temp_html)
+                        } else {
+                            for (let i = 0; i < items.length; i++) {
+                                let img = items[i]['image'];
+                                let itemId = items[i]['_id']
 
-                        // 남은 달 구하기
-                        let startDate = new Date(items[i]['date'])
-                        let startYear = startDate.getFullYear()
-                        let startMonth = startDate.getMonth()+1
-                        let date = new Date
-                        let nowMonth = date.getMonth()+1
-                        let nowYear = date.getFullYear()
-                        let payMonth = +(items[i]["months"])
-                        let remainMonth = remainMonthCalculate(nowYear, nowMonth, startYear, startMonth, payMonth)
+                                // 남은 달 구하기
+                                let startDate = new Date(items[i]['date'])
+                                let startYear = startDate.getFullYear()
+                                let startMonth = startDate.getMonth() + 1
+                                let date = new Date
+                                let nowMonth = date.getMonth() + 1
+                                let nowYear = date.getFullYear()
+                                let payMonth = +(items[i]["months"])
+                                let remainMonth = remainMonthCalculate(nowYear, nowMonth, startYear, startMonth, payMonth)
 
-                        let textRemainMonth = remainMonth <= 0? '✔' : remainMonth
+                                let textRemainMonth = remainMonth <= 0 ? '✔' : remainMonth
 
-                        let temp_html
-                        if(select === 1){temp_html = `<div class="image">
+                                let temp_html
+                                if (select === 1) {
+                                    temp_html = `<div class="image">
                                               <img
                                                 id=${itemId}
                                                 src=${img}
@@ -64,9 +68,9 @@ const buttonClick = (select)=>{
                                               />
                                               <div class="circle">${textRemainMonth}</div>
                                            </div>`
-                        $('.image-container').append(temp_html)}
-
-                        else if(select === 2 && remainMonth > 0){temp_html = `<div class="image">
+                                    $('.image-container').append(temp_html)
+                                } else if (select === 2 && remainMonth > 0) {
+                                    temp_html = `<div class="image">
                                               <img
                                                 id=${itemId}
                                                 src=${img}
@@ -75,9 +79,9 @@ const buttonClick = (select)=>{
                                               />
                                               <div class="circle">${textRemainMonth}</div>
                                            </div>`
-                        $('.image-container').append(temp_html)}
-
-                        else if(select === 3 && remainMonth <= 0){temp_html = `<div class="image">
+                                    $('.image-container').append(temp_html)
+                                } else if (select === 3 && remainMonth <= 0) {
+                                    temp_html = `<div class="image">
                                               <img
                                                  id=${itemId}
                                                 src=${img}
@@ -86,12 +90,22 @@ const buttonClick = (select)=>{
                                               />
                                               <div class="circle">${textRemainMonth}</div>
                                            </div>`
-                        $('.image-container').append(temp_html)}
-                        $(`#${itemId}`).click(()=>{onclickmypage(`${itemId}`)})
-                    }}
+                                    $('.image-container').append(temp_html)
+                                }
+                                $(`#${itemId}`).click(() => {
+                                    onclickmypage(`${itemId}`)
+                                })
+                            }
+                        }
+                    }else{
+                        alert(response['msg'])
+                        window.location.href = "/"
+                    }
                 },
                 error: function (response) {
+                        console.log(response)
                         alert(response['responseJSON']['msg'])
+
                 }
             })}
 
@@ -105,6 +119,9 @@ $(function() {
         data: {},
 
         success: function (response) {
+                 console.log(response)
+            if (response['result']==="success") {
+   // alert(response['msg'])
             let items = response["items"];
             if (items === undefined) {
                 let temp_html
@@ -143,10 +160,15 @@ $(function() {
                 $(`#${itemId}`).click(()=>{onclickmypage(`${itemId}`)})
             }
             }
+            }else{
+                alert(response['msg'])
+                window.location.href = '/'
+            }
+
 
         },
         error: function (response) {
-            alert(response['responseJSON']['msg'])
+
         }
     })
 })
