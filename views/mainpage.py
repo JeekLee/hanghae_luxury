@@ -6,9 +6,6 @@ import os
 import certifi
 import jwt
 
-
-import jwt
-
 ca = certifi.where()
 
 mainpage = Blueprint("mainpage", __name__, template_folder="templates")

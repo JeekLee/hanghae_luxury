@@ -30,10 +30,12 @@ def index():
 
     except jwt.ExpiredSignatureError:
         print("Token Expired")
-        return redirect(url_for('login.index'))
+        return redirect(url_for('login.index'), )
     except jwt.exceptions.DecodeError:
         print("Token decoding failed")
         return redirect(url_for('login.index'))
+
+
 
 @itempage.route('/getitem', methods=["GET"])
 def pass_item() :
