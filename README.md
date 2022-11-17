@@ -19,30 +19,30 @@
 <img width="1143" alt="image" src="https://user-images.githubusercontent.com/101397314/202328736-42bf7193-0342-497a-ab39-49fc01089871.png">
 
 ### 04. 페이지 소개
-1) 회원 가입
+#### 1) 회원 가입
 > 아이디 중복 확인, 글자수 제한, 문자 포함 제한<br>
 비밀번호 일치 확인
 
 ![회원가입](https://user-images.githubusercontent.com/101397314/202399905-d789b43f-8d20-4c58-a3b2-3c7d214ca68a.gif)
 
-2) 로그인 
+#### 2) 로그인 
 > 아이디, 비밀번호 일치 확인<br>
 JWT 발급
 
 ![로그인](https://user-images.githubusercontent.com/101397314/202399940-484544b1-17ab-493d-a2b6-2596928d88bc.gif)
 
-3) 메인 페이지
+#### 3) 메인 페이지
 > 전체 아이템 목록, 할부 목록, 할부 완료 목록 구분<br>
 할부 남은 개월수 표시
 
 ![메인](https://user-images.githubusercontent.com/101397314/202399973-7c49be26-ef9c-41b4-bcdf-53d54685d40d.gif)
 
-4) 추가 페이지
+#### 4) 추가 페이지
 > URL 복붙 시, 자동으로 썸네일 이미지, 금액, 제품명 크롤링<br>
 
 ![추가하기](https://user-images.githubusercontent.com/101397314/202399998-599ec08b-2eea-4dec-b0aa-6ef51686f231.gif)
 
-5) 상세 페이지
+#### 5) 상세 페이지
 > 아이템 관련 유머 랜덤 배치<br>
 화살표 클릭시 상세페이지 내부에서 다른 리스트로 이동
 
