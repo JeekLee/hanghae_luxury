@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, jsonify, redirect,url_for
+from flask import Blueprint, render_template, request, jsonify, redirect, url_for
 from db import db
 import os
 import certifi
@@ -8,9 +8,14 @@ ca = certifi.where()
 
 mainpage = Blueprint("mainpage", __name__, template_folder="templates")
 
+global user
+global tmp
+
+
 @mainpage.route('/')
 def question():
     return render_template("mainpage.html")
+
 
 @mainpage.route("/getitems", methods=["GET"])
 def all_items_get():
@@ -21,7 +26,7 @@ def all_items_get():
         items = list(db.items.find({'userid': payload['id']}))
         for i in items:
             i['_id'] = str(i['_id'])
-        print(1)
+            print(1)
         return jsonify({'result': 'success', 'items': items})
     except jwt.ExpiredSignatureError:
         # 위를 실행했는데 만료시간이 지났으면 에러가 납니다.
@@ -30,5 +35,4 @@ def all_items_get():
     except jwt.exceptions.DecodeError:
         print(3)
         return jsonify({'result': 'fail', 'msg': "로그인 시간이 만료되었습니다."})
-
 

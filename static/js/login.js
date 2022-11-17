@@ -11,8 +11,21 @@ const VERIFY_LOGINPWD = document.getElementById('verify_loginpwd');
 var FLAGLOGINID = false;
 var FLAGLOGINPWD = false;
 
+// 로그인 만료
+let token_msg = "default"
+const searchParams = new URLSearchParams(location.search);
+for (const param of searchParams) {
+    token_msg = param[1];
+}
+
 $(document).ready(function () {
     console.log('login.js called');
+    if (token_msg == 'expired_token') {
+        alert("로그인 시간이 만료되었습니다.");
+    }
+    if (token_msg == 'invalid_token') {
+        alert("유효하지 않은 로그인 정보입니다.");
+    }
 });
 
 //로그인 시 영어,숫자만
@@ -50,6 +63,8 @@ function login() {
     })
 }
 
+
+
 function verify() {
 // ID 확인
     if (LOGIN_ID.value.length >= 5 && LOGIN_ID.value.length <= 15) {
@@ -86,6 +101,7 @@ function verify() {
         LOGIN_BTN.disabled = true;
     }
 }
+
 LOGIN_ID.addEventListener('keyup', verify);
 LOGIN_PWD.addEventListener('keyup', verify);
 LOGIN_BTN.addEventListener('click', login);
