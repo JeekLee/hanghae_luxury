@@ -1,17 +1,17 @@
-from flask import Blueprint, render_template, request, jsonify, redirect, url_for
-from pymongo import MongoClient
-from bson.objectid import ObjectId
+from flask import Blueprint, render_template, request, jsonify
+
+from db import db
+from dotenv import load_dotenv
+import os
+
 import certifi
 
 import jwt
 
-SECRET_KEY = 'SPARTA'
 
+import jwt
 
 ca = certifi.where()
-
-client = MongoClient('mongodb+srv://Luxury:hanghae99@luxury.uhfyrvo.mongodb.net/Luxury?retryWrites=true&w=majority', tlsCAFile=ca)
-db = client.Luxury
 
 mainpage = Blueprint("mainpage", __name__, template_folder="templates")
 
@@ -23,7 +23,7 @@ def question():
 def all_items_get():
     token_receive = request.cookies.get('mytoken')
     try:
-        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        payload = jwt.decode(token_receive, os.getenv('SECRET_KEY'), algorithms=['HS256'])
         print(payload)
 
         # payload 안에 id가 들어있습니다. 이 id로 유저정보를 찾습니다.
@@ -38,8 +38,4 @@ def all_items_get():
         return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
     except jwt.exceptions.DecodeError:
         return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
-
-
-if __name__ == '__main__':
-    app.run('0.0.0.0', port=5000, debug=True)
 

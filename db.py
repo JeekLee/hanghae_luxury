@@ -1,10 +1,17 @@
 from pymongo import MongoClient
 import certifi
+from dotenv import load_dotenv
+import os
 
 ca = certifi.where()
 
-client = MongoClient('mongodb+srv://Luxury:hanghae99@luxury.uhfyrvo.mongodb.net/Luxury?retryWrites=true&w=majority', tlsCAFile=ca)
-db = client.Luxury
+load_dotenv()
+DB = os.getenv('DB')
+client = MongoClient(DB, tlsCAFile=certifi.where())
+
+db = client.hhluxury1
+
+print("success")
 
 # doc = {'username':'username',
 #        'item_id': 1,
