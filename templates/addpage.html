@@ -12,15 +12,32 @@
 
   </style>
   <script>
+    
     $(document).ready(function () {
       showUrl();
-    $('#form_info').submit(function(event){
-      event.preventDefault();
-      saveItem()
-    })
+        $('#form_info').submit(function(event){
+          event.preventDefault();
+          saveItem()
+        })
+      readClipboard()
+
     });
 
-    const isValidUrl = $("#url").val() !== "";
+    function readClipboard(){
+      navigator.clipboard.readText()
+        .then(text => {
+          console.log('Pasted content: ', text);
+        })
+        .catch(err => {
+          console.error('Failed to read clipboard contents: ', err);
+        });
+    }
+    function isValidUrl (url){
+
+
+    }
+
+    // const isValidUrl = $("#url").val() !== "";
 
     function showUrl() {
       $("#url").val("");
@@ -32,25 +49,25 @@
       $("#url_wrapper").hide() && $("#item").show();
     }
     function getItemFromUrl() {
-      $.ajax({
-        type: "POST",
-        url: "/addpage/url",
-        data: { url_give: $("#url").val() },
+      // $.ajax({
+      //   type: "POST",
+      //   url: "/addpage/url",
+      //   data: { url_give: $("#url").val() },
 
-        success: function (response) {
-          console.log(response)
-          if(response['result']==="success"){
-            $("#item_title").text(response['data']["title"]);
-            $("#item_price").text(response['data']["price"]);
-            $("#item_img").attr("src", response['data']["image"]);
-            showItem();
-          }else{
-            alert(response['msg'])
-            location.href = "/"
-          }
+      //   success: function (response) {
+      //     console.log(response)
+      //     if(response['result']==="success"){
+      //       $("#item_title").text(response['data']["title"]);
+      //       $("#item_price").text(response['data']["price"]);
+      //       $("#item_img").attr("src", response['data']["image"]);
+      //       showItem();
+      //     }else{
+      //       alert(response['msg'])
+      //       location.href = "/"
+      //     }
        
-        },
-      });
+      //   },
+      // });
     }
 
     function saveItem() {
