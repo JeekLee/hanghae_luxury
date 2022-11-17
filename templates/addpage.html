@@ -38,12 +38,17 @@
         data: { url_give: $("#url").val() },
 
         success: function (response) {
-          console.log("response", response);
-          console.log(response["image"]);
-          $("#item_title").text(response["title"]);
-          $("#item_price").text(response["price"]);
-          $("#item_img").attr("src", response["image"]);
-          showItem();
+          console.log(response)
+          if(response['result']==="success"){
+            $("#item_title").text(response['data']["title"]);
+            $("#item_price").text(response['data']["price"]);
+            $("#item_img").attr("src", response['data']["image"]);
+            showItem();
+          }else{
+            alert(response['msg'])
+            location.href = "/"
+          }
+       
         },
       });
     }
@@ -60,9 +65,13 @@
           months_give: $("#item_months").val(),
         },
         success: function (response) {
-          if(response['msg']==="success"){
+          if(response['result']==="success"){
             alert("저장 완료 !");
             location.href = "/mainpage"
+          }else{
+            alert(response['msg'])
+            location.href = "/"
+
           }
         },
       });
