@@ -1,19 +1,14 @@
 from flask import Blueprint, render_template, request, jsonify, url_for, redirect
-from pymongo import MongoClient
+from db import db
+from dotenv import load_dotenv
+import os
 import hashlib
 import datetime
 import jwt
 import certifi
 
-from flask_jwt_extended import create_access_token
-from flask_jwt_extended import get_jwt
-from flask_jwt_extended import jwt_required
-from flask_jwt_extended import JWTManager
-
 client = MongoClient('mongodb+srv://Luxury:hanghae99@luxury.uhfyrvo.mongodb.net/Luxury?retryWrites=true&w=majority')
 db = client.Luxury
-
-SECRET_KEY = 'SPARTA'
 
 login = Blueprint("login", __name__, template_folder="templates")
 
@@ -39,10 +34,13 @@ def api_login():
 
     # 찾으면 JWT 토큰을 만들어 발급
     if result is not None:
-
+        # JWT 토큰에는, payload와 시크릿 키가 필요
+        # 시크릿키가 있어야 토큰을 디코딩(=인코딩 된 암호 풀기)해서 payload 값을 볼 수 있다.
+        # 아래에선 id와 exp를 담는다. 즉 JWT토큰을 풀어 유저 ID 값을 알 수 있다.
+        # exp에는 만료 시간을 넣는다. 만료시간이 지나면, 시크릿 키로 토큰을 풀 때 만료되었다고 에러가 난다.
         payload = {
             'id': id_receive,
-            'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=5)
+            'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=15)  #나중에 minute 로 변경
         }
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
 
@@ -51,36 +49,3 @@ def api_login():
     # 찾지 못하면
     else:
         return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
-
-
-@login.route('/login/api/id', methods=['GET'])
-def api_valid():
-    token_receive = request.cookies.get('mytoken')
-
-    try:
-        # token을 시크릿키로 디코딩합니다.
-        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-
-        userinfo = db.user.find_one({'id': payload['id']}, {'_id': 0})
-        return jsonify({'result': 'success', 'user_id': userinfo['id']})
-    except jwt.ExpiredSignatureError:
-        # 위를 실행했는데 만료시간이 지났으면 에러가 납니다.
-        return jsonify({'result': 'fail', 'msg': '로그인 시간이 만료되었습니다.'})
-    except jwt.exceptions.DecodeError:
-        return jsonify({'result': 'fail', 'msg': '로그인 정보가 존재하지 않습니다.'})
-
-@login.route('/')
-def home():
-    token_receive = request.cookies.get('mytoken')
-
-    try:
-        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-
-        user_info = db.user.find_one({"id": payload['id']})
-        return render_template('mainpage.html', ID=user_info["id"])
-    except jwt.ExpiredSignatureError:
-        return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
-    except jwt.exceptions.DecodeError:
-        return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
-
-

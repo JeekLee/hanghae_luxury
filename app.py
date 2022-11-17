@@ -5,6 +5,8 @@ from views.register import register
 from views.mainpage import mainpage
 from views.addpage import addpage
 from views.itempage import itempage
+import os
+
 
 app = Flask(__name__)
 
