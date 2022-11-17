@@ -16,7 +16,8 @@ addpage = Blueprint("addpage", __name__, template_folder="templates")
 
 @addpage.route('/')
 def home():
-    return render_template('addpage.html')
+
+     return render_template("addpage.html")
 
 
 @addpage.route('/url', methods=["POST"])
