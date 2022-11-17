@@ -12,15 +12,48 @@
 
   </style>
   <script>
+    
     $(document).ready(function () {
       showUrl();
-    $('#form_info').submit(function(event){
-      event.preventDefault();
-      saveItem()
-    })
+        $('#form_info').submit(function(event){
+          event.preventDefault();
+          saveItem()
+        })
+      readClipboard() 
     });
 
-    const isValidUrl = $("#url").val() !== "";
+    window.addEventListener('focus', function() {
+      readClipboard()
+    }, false);
+
+    function readClipboard(){
+      navigator.clipboard.readText()
+        .then(text => {
+          console.log("text", text)
+          if(isValidUrl(text)){
+            $.cookie('newUrl',text)
+            if($.cookie('oldUrl') !== $.cookie('newUrl')){
+              if(window.confirm('클립보드에 복사된 상품을 추가하시겠습니까?')){
+                $.cookie('oldUrl',$.cookie('newUrl'))
+                getItemFromClip(text)
+                $.cookie('newUrl','') 
+
+            }else{
+              $.cookie('newUrl','') 
+            }
+            }
+          }
+        })
+        .catch(err => {
+          console.error('Failed to read clipboard contents: ', err);
+        });
+    }
+    function isValidUrl (url){
+      const valid = url.startsWith("https://smartstore.naver.com/")
+      return valid
+    }
+
+    // const isValidUrl = $("#url").val() !== "";
 
     function showUrl() {
       $("#url").val("");
@@ -32,11 +65,13 @@
       $("#url_wrapper").hide() && $("#item").show();
     }
     function getItemFromUrl() {
-      $.ajax({
+      const url = $("#url").val()
+      console.log("isvalid", url)
+      if(isValidUrl(url)){
+        $.ajax({
         type: "POST",
         url: "/addpage/url",
-        data: { url_give: $("#url").val() },
-
+        data: { url_give: url },
         success: function (response) {
           console.log(response)
           if(response['result']==="success"){
@@ -45,6 +80,34 @@
             $("#item_img").attr("src", response['data']["image"]);
             showItem();
           }else{
+            alert(response['msg'])
+            location.href = "/"
+          }
+        },
+      });
+      }else{
+        alert('유효하지 않은 주소입니다 ㅜㅜ 현재 네이버 스마트 스토어의 상품만 등록이 가능합니다 !')
+        $("#url").val('')
+      }
+
+
+
+
+    }
+    function getItemFromClip(url) {
+      $.ajax({
+        type: "POST",
+        url: "/addpage/url",
+        data: { url_give: url},
+        success: function (response) {
+          console.log(response)
+          if(response['result']==="success"){
+            $("#item_title").text(response['data']["title"]);
+            $("#item_price").text(response['data']["price"]);
+            $("#item_img").attr("src", response['data']["image"]);
+            showItem();
+          }else{
+            $.removeCookie('mytoken')
             alert(response['msg'])
             location.href = "/"
           }
@@ -69,6 +132,7 @@
             alert("저장 완료 !");
             location.href = "/mainpage"
           }else{
+            $.removeCookie('mytoken')
             alert(response['msg'])
             location.href = "/"
 
